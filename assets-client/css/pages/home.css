@@ -1,0 +1,253 @@
+body {
+  background-color: #1d1d1d;
+}
+.movie1 {
+  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
+    url(../../assets/images/home-bg.svg);
+  background-repeat: no-repeat;
+  height: 648px;
+  background-size: 100%;
+  display: flex;
+  position: relative;
+}
+
+.navbar {
+  width: 56px;
+  height: 100vh;
+  background-color: #1d1d1d80;
+  box-shadow: 0 40px 40px 8px #00000029;
+  backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding-top: 40px;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar a img {
+  width: 56px;
+  height: 56px;
+}
+
+.nav-list li:hover {
+  opacity: 0.6;
+  transition: 0.6s;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.nav-list li a img {
+  width: 19.2px;
+  height: 19.2px;
+}
+
+.header-text-area {
+  padding-left: 256px;
+  padding-top: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 632px;
+}
+
+.header-text-area h4 {
+  background-color: #1d1d1d80;
+  padding: 4px 0 4px 0;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 111px;
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #0feffd;
+  text-align: center;
+}
+
+.header-text-area ul {
+  display: flex;
+  gap: 2px;
+}
+
+.header-text-area h1 {
+  font-family: var(--robotoFont);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 64px;
+  color: var(--textColor);
+}
+
+.header-text-area p {
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--textColor);
+}
+
+.header-text-area a {
+  background: none;
+  border-radius: 40px;
+  width: 200px;
+  height: 56px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid transparent;
+  border-image: linear-gradient(#0feffd, #ff00f5, #0feffd38) 1;
+  font-family: var(--robotoFont);
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.slide-dot {
+  display: flex;
+  gap: 14px;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+}
+
+.slide-dot img {
+  width: 8px;
+  height: 8px;
+}
+
+.section-action a {
+  display: inline-block;
+  padding-left: 56px;
+  font-family: var(--robotoFont);
+  color: var(--textColor);
+  line-height: 24px;
+  font-size: 35px;
+  margin-top: 34px;
+  padding-bottom: 19px;
+}
+
+.action-card-area {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.action-card-area::-webkit-scrollbar {
+  display: none;
+}
+
+.action-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin-right: 16px;
+  position: relative;
+  width: 292px;
+  height: 440px;
+  padding-left: 24px;
+  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
+    url(../../assets/images/wonder-woman.svg);
+}
+
+.action-card h1 {
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--robotoFont);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--textColor);
+}
+
+.action-card h4 {
+  position: absolute;
+  bottom: 104px;
+  background-color: #1d1d1d80;
+  padding: 4px 8px 4px 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #0feffd;
+  text-align: center;
+}
+.container {
+  padding-left: 56px;
+}
+
+.section-comedy {
+  padding-bottom: 100px;
+}
+.section-comedy a {
+  display: inline-block;
+  padding-left: 56px;
+  font-family: var(--robotoFont);
+  color: var(--textColor);
+  line-height: 24px;
+  font-size: 35px;
+  margin-top: 60px;
+  padding-bottom: 19px;
+}
+
+.comedy-card-area {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.comedy-card-area::-webkit-scrollbar {
+  display: none;
+}
+
+.comedy-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  position: relative;
+  width: 504px;
+  height: 736px;
+  padding-left: 24px;
+  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
+    url(../../assets/images/wonder-woman.svg);
+  background-size: 100%;
+}
+
+.comedy-card h1 {
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--robotoFont);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--textColor);
+}
+
+.comedy-card h4 {
+  position: absolute;
+  bottom: 104px;
+  background-color: #1d1d1d80;
+  padding: 4px 8px 4px 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #0feffd;
+  text-align: center;
+}
