@@ -128,11 +128,12 @@ body {
   display: inline-block;
   padding-left: 56px;
   font-family: var(--robotoFont);
+  font-weight: 500;
   color: var(--textColor);
   line-height: 24px;
   font-size: 35px;
   margin-top: 34px;
-  padding-bottom: 19px;
+  padding-bottom: 24px;
 }
 
 .action-card-area {
@@ -195,11 +196,12 @@ body {
   display: inline-block;
   padding-left: 56px;
   font-family: var(--robotoFont);
+  font-weight: 500;
   color: var(--textColor);
   line-height: 24px;
   font-size: 35px;
   margin-top: 60px;
-  padding-bottom: 19px;
+  padding-bottom: 30px;
 }
 
 .comedy-card-area {
@@ -223,23 +225,24 @@ body {
   height: 736px;
   padding-left: 24px;
   background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
-    url(../../assets/images/wonder-woman.svg);
+    url(../../assets/images/falcon-movie.svg);
   background-size: 100%;
 }
 
 .comedy-card h1 {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   font-family: var(--robotoFont);
   font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 32px;
+  line-height: 40px;
   color: var(--textColor);
+  width: 456px;
 }
 
 .comedy-card h4 {
   position: absolute;
-  bottom: 104px;
+  bottom: 136px;
   background-color: #1d1d1d80;
   padding: 4px 8px 4px 8px;
   border-top-right-radius: 8px;
