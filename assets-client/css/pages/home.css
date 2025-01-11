@@ -157,8 +157,7 @@ body {
   width: 292px;
   height: 440px;
   padding-left: 24px;
-  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
-    url(../../assets/images/wonder-woman.svg);
+  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
 }
 
 .action-card h1 {
@@ -224,9 +223,7 @@ body {
   width: 504px;
   height: 736px;
   padding-left: 24px;
-  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
-    url(../../assets/images/falcon-movie.svg);
-  background-size: 100%;
+  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
 }
 
 .comedy-card h1 {
@@ -253,4 +250,14 @@ body {
   line-height: 16px;
   color: #0feffd;
   text-align: center;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
