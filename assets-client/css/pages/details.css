@@ -1,0 +1,26 @@
+.detail-hero{
+    background-image: url(../../assets/images/details.svg);
+    background-repeat: no-repeat;
+    height: 648px;
+    background-size: 100%;
+    display: flex;
+   
+}
+
+.movie-title{
+    position: relative;
+    top: 0;
+    left: 54px;
+    width: 715px;
+    height: 139px;
+    background-color: #20283ECC;
+    backdrop-filter: blur(24px);
+    border-radius: 24px;
+    gap: 8px;
+    color: #fff;
+}
+.movie-details{
+    display: flex;
+   
+    align-items: center;
+}
