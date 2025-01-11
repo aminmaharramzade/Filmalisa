@@ -106,10 +106,6 @@ body {
   gap: 20px;
 }
 
-.search-text-area img {
-  cursor: pointer;
-}
-
 .search-card-area {
   display: flex;
   flex-wrap: wrap;
