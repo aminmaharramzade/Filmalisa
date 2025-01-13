@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #171616;
+    font-family: Arial, sans-serif;
+    display: flex;
+    /* Yatayda menü ve içerik yan yana */
+    min-height: 100vh;
+}
+
+aside {
+    height: 100vh;
+    /* Yan menü tam ekran boyunda olacak */
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.menubar {
+    background-color: #1e1e1e;
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 750px;
+    box-shadow: 35px 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.menu-logo img {
+    width: 45px;
+    height: 50px;
+    margin: 40px 0;
+}
+
+.menubar-content {
+    margin-top: 20px;
+}
+
+.menubar-content ul {
+    list-style: none;
+    padding-top: 31px;
+}
+
+.menubar-content ul li {
+    margin-bottom: 40px;
+}
+
+.menubar-content ul li img {
+    width: 24px;
+    height: 24px;
+}
+
+.rightbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+   
+    margin: auto;
+}
+
+.rightbar img {
+    width: 400px;
+    height: 320px;
+    margin-bottom: 38px;
+}
+.rightbar h2 {
+    font-family: var(--poppinsFont);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 56px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #EBEEF5;
+    text-decoration-skip-ink: none;
+    margin-bottom: 16px;
+}
+
+.rightbar p {
+    color: #8E95A9;
+    font-family: var(--poppinsFont);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    text-decoration-skip-ink: none;
+    margin-bottom: 38px;
+    width: 588px;
+height: 48px;
+
+
+}
+
+/* .btn {
+    width: 139px;
+    height: 56px;
+    border-radius: 12px;
+    border: none;
+    background-color: #9B51E0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn a {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--poppinsFont);
+    color: #8E95A9;
+    text-decoration: none;
+} */
+
+
+
+.btn {
+    display: inline-block;
+    width: 139px;
+    height: 56px;
+    line-height: 56px; 
+    border-radius: 12px;
+    background-color: #9B51E0;
+    color: #fff; 
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--poppinsFont);
+    text-align: center;
+    
+    text-decoration: none; 
+    cursor: pointer;
+ 
+}
+
+.btn:hover {
+    background-color: #8A40D4; /* Hover efekti */
+    transform: scale(1.05); /* Hafif büyüme efekti */
+}
