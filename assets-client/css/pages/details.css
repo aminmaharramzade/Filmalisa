@@ -18,13 +18,31 @@ body {
   width: 715px;
   height: 139px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
   background-color: #20283ecc;
   backdrop-filter: blur(24px);
   border-radius: 24px;
   gap: 8px;
   color: #fff;
+}
+.movie-title-content{
+  padding: 40px 0 35px 40px;
+}
+.movie-title-category{
+  display: flex;
+  padding-bottom: 8px;
+}
+.movie-title-category p{
+  font-size: 12px;
+  color: #BEB7FB;
+
+}
+.movie-title-content h4{
+  font-size: 32px;
+  font-weight: 600;
+
 }
 .movie-details {
   display: flex;
