@@ -1,31 +1,26 @@
-const actionCardArea = document.querySelector(".action-card-area");
-let isDown = false;
-let startX;
-let scrollLeft;
+const carouselInner = document.querySelector(".carousel-inner");
+const dots = document.querySelectorAll(".dot");
 
-actionCardArea.addEventListener("mousedown", (e) => {
-  isDown = true;
-  actionCardArea.classList.add("active");
-  startX = e.pageX - actionCardArea.offsetLeft;
-  scrollLeft = actionCardArea.scrollLeft;
+let currentIndex = 0;
+
+function updateCarousel(index) {
+  const offset = -index * 100;
+  carouselInner.style.transform = `translateX(${offset}%)`;
+
+  dots.forEach((d) => d.classList.remove("active"));
+  dots[index].classList.add("active");
+}
+
+dots.forEach((dot) => {
+  dot.addEventListener("click", () => {
+    currentIndex = parseInt(dot.getAttribute("data-index"));
+    updateCarousel(currentIndex);
+  });
 });
 
-actionCardArea.addEventListener("mouseleave", () => {
-  isDown = false;
-  actionCardArea.classList.remove("active");
-});
+function autoSlide() {
+  currentIndex = (currentIndex + 1) % dots.length;
+  updateCarousel(currentIndex);
+}
 
-actionCardArea.addEventListener("mouseup", () => {
-  isDown = false;
-  actionCardArea.classList.remove("active");
-});
-
-actionCardArea.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - actionCardArea.offsetLeft;
-  const walk = (x - startX) * 3; 
-  actionCardArea.scrollLeft = scrollLeft - walk;
-});
-
-actionCardArea.style.scrollBehavior = "smooth";
+setInterval(autoSlide, 5000);
