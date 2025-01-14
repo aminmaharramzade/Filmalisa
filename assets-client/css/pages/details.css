@@ -13,10 +13,13 @@ body {
 
 .movie-title {
   position: absolute; 
-  bottom: 0;
+  bottom: -70px;
   left: 110px;
   width: 715px;
   height: 139px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   background-color: #20283ecc;
   backdrop-filter: blur(24px);
   border-radius: 24px;
