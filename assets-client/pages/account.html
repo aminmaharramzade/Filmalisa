@@ -9,51 +9,61 @@
   </head>
   <body>
     <aside>
-      <div class="menubar">
-        <div class="menu-logo">
-          <img src="../assets/images/logo.svg" alt="" />
-        </div>
-        <div class="menubar-content">
-          <ul>
-            <li><img src="../assets/icons/home-icon.svg" alt="" /></li>
-            <li><img src="../assets/icons/frame.svg" alt="" /></li>
-            <li><img src="../assets/icons/tv.svg" alt="" /></li>
-            <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      <!-- menu-bar -->
+      <header class="header">
+        <nav class="navbar">
+          <a href="../../index.html"
+            ><img src="../assets/images/logo.svg" alt=""
+          /></a>
+          <ul class="nav-list">
+            <li>
+              <a href="#"
+                ><img src="../assets/icons/home-icon.svg" alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="../assets/icons/movie-icon.svg" alt=""
+              /></a>
+            </li>
+            <li>
+              <a href="#"><img src="../assets/icons/star-icon.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="../assets/icons/account-active-icon.svg" alt=""
+              /></a>
+            </li>
           </ul>
-        </div>
-      </div>
+        </nav>
+      </header>
+      <!-- menu end bar -->
     </aside>
 
     <div class="right-part">
-      <div class="man-logo">
-        <img src="../assets//images/man.svg" alt="" />
+      <div class="account-image">
+        <img src="../assets/images/account-img.svg" alt="">
       </div>
-      <div class="formbar">
-        <form action="">
-          <div class="input-box">
-            <input type="url" placeholder="profile image url" />
-            <img src="../assets/icons/url.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" class="eyesicon">
-          </div>
-          <div class="input-box">
-            <input type="text" placeholder="full name" />
-            <img src="../assets/icons/fullname.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" class="eyesicon">
-          </div>
-          <div class="input-box">
-            <input type="email" class="custom" placeholder="rahimlisarkhan@gmail.com " />
-            <img src="../assets/icons/gmail.svg" alt="" />
-        
-          </div>
-          <div class="input-box">
-            <input type="password" placeholder="password" />
-            <img src="../assets/icons/password.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" class="eyesicon">
+      <form class="form-login">
+        <div class="login-input-area">
+          <div class="login-input">
+            <img src="./assets-client/assets/icons/username.png" alt="" />
+            <input type="text" placeholder="username" />
           </div>
 
-          <button type="submit" class="btn"><a href="">save</a></button>
-        </form>
-      </div>
+          <div class="login-input">
+            <img src="./assets-client/assets/icons/password.png" alt="" />
+            <img
+              src="./assets-client/assets/icons/password-hidden.svg"
+              alt=""
+            />
+            <input type="password" placeholder="password" />
+          </div>
+        </div>
+        <div class="login-btn">
+          <a href="./assets-client/pages/dashboard.html">login</a>
+        </div>
+      </form>
     </div>
 
 

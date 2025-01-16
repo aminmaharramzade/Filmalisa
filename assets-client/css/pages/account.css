@@ -19,126 +19,134 @@
     padding-left: 20px;
   }
   
-  .menubar {
-    background-color: #1e1e1e;
+  .navbar {
     width: 56px;
+    height: 90vh;
+    box-shadow: 0 40px 40px 8px #00000029;
+    backdrop-filter: blur(24px);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    gap: 64px;
+    padding-top: 40px;
     align-items: center;
-    height: 750px;
-    box-shadow: 35px 4px 18px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin-left: 20px;
+    margin-top: 8px;
   }
   
-  .menu-logo img {
-    width: 45px;
-    height: 50px;
-    margin: 40px 0;
-  }
-  .menubar-content{
-    margin-top: 20px;
-  }
-  .menubar-content ul {
-    list-style: none;
-    padding-top: 31px;
-}
-  
-  
-  
-  .menubar-content ul li {
-    margin-bottom: 40px;
+  .navbar a img {
+    width: 56px;
+    height: 56px;
   }
   
-  .menubar-content ul li img {
-    width: 24px;
-    height: 24px;
+  .nav-list li:hover {
+    opacity: 0.6;
+    transition: 0.6s;
+  }
+  
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+  
+  .nav-list li a img {
+    width: 19.2px;
+    height: 19.2px;
   }
   
   
   .right-part {
-    flex: 1; /* Genişliğin geri kalanını kaplar */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
     align-items: center; 
-    padding: 20px;
+    margin-top: 160px;
   }
   
-  .man-logo img {
-    width: 224px;
-    height: 224px;
-    margin-bottom: 24px;
-  }
-  
-  .formbar {
-    width: 100%;
-    max-width: 559px; 
-    padding: 20px;
-    border-radius: 12px;
-    
-  }
-  
-  /* Form Elemanları */
-  .input-box {
-    position: relative;
-    margin-bottom: 16px;
-  }
-  
-  .input-box input {
-    width: 100%;
-    height: 48px;
-    border: 2px solid #323b54;
-    border-radius: 12px;
-    padding-left: 48px; /* İkon için boşluk bırakılır */
-    background-color: #000;
-    color: #fff;
-  }
-  
-  .input-box input::placeholder {
-    color: #475069;
-  }
-  .custom::placeholder {
-    color: #fff;
-  }
-  .input-box img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 16px; /* Sol tarafta yer alır */
-    width: 24px;
-    height: 24px;
-  }
-  
-  .input-box .eyesicon {
-    position: absolute;
-    top: 50%;
-    right: 16px; /* Sağ tarafa yerleştirir */
-    left: auto; 
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-  }
-  
-  /* Save Butonu */
-  .btn {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 12px;
-    background-color: #9b51e0;
-    color: #fff;
+  .account-image {
+    background: linear-gradient(#72F435 , #027981);
+    border-radius: 50%;
+    width: 232px;
+    height: 232px;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;
+  }
+
+  .account-image img {
+    width: 224px;
+    height: 224px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .form-login {
+    margin-top: 40px;
+  }
+  .login-input {
+    position: relative;
+  }
+  
+  .login-input input {
+    width: 491px;
+    height: 64px;
+    border-radius: 12px;
+    border: 1px solid #323b54;
+    background-color: #0000001a;
+    padding-left: 56px;
+    color: var(--textColor);
+    font-size: 18px;
+  }
+  
+  .login-input input::placeholder {
+    color: #475069;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: var(--poppinsFont);
+    padding: 24px 0;
+  }
+  
+  .login-input img:nth-child(1) {
+    position: absolute;
+    left: 16px;
+    top: 20px;
+  }
+  
+  .login-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .login-input img:nth-child(2) {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+  }
+  
+  .login-btn {
+    background-color: #9b51e0;
+    width: 547px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
     cursor: pointer;
   }
   
-  .btn a {
-    color: #fff;
-    text-decoration: none;
+  .form-login a {
+    font-family: var(--poppinsFont);
+    font-weight: 400;
+    line-height: 24px;
     font-size: 16px;
-    font-weight: 600;
+    color: var(--textColor);
   }
   
 
