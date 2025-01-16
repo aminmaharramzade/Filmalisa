@@ -79,7 +79,7 @@ body {
   margin-bottom: 40px;
 }
 .login-input {
-  position: relative;
+position: relative;
 }
 
 .login-input input {
@@ -94,18 +94,18 @@ body {
 }
 
 .login-input input::placeholder {
-  color: #475069;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  font-family: var(--poppinsFont);
-  padding: 24px 0;
+color: #475069;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+font-family: var(--poppinsFont);
+padding: 24px 0;
 }
 
 .login-input img:nth-child(1) {
-  position: absolute;
-  left: 16px;
-  top: 20px;
+position: absolute;
+left: 16px;
+top: 20px;
 }
 
 .login-input-area {
@@ -115,9 +115,9 @@ body {
 }
 
 .login-input img:nth-child(2) {
-  position: absolute;
-  right: 16px;
-  top: 20px;
+position: absolute;
+right: 16px;
+top: 20px;
 }
 
 .login-btn {
