@@ -1,18 +1,17 @@
 body {
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
 }
 .detail-hero {
   background-image: url(../../assets/images/details.svg);
   background-repeat: no-repeat;
   height: 648px;
-  background-size: 100%;
+  width: 100%;
   display: flex;
-  position: relative; 
+  position: relative;
 }
 
 .movie-title {
-  position: absolute; 
+  position: absolute;
   bottom: -70px;
   left: 110px;
   width: 715px;
@@ -27,39 +26,59 @@ body {
   gap: 8px;
   color: #fff;
 }
-.movie-title-content{
+.movie-title-content {
   padding: 40px 0 35px 40px;
 }
-.movie-title-category{
+.movie-title-category {
   display: flex;
   padding-bottom: 8px;
 }
-.movie-title-category p{
+.movie-title-category p {
   font-size: 12px;
-  color: #BEB7FB;
-
+  color: #beb7fb;
 }
-.movie-title-content h4{
+.movie-title-content h4 {
   font-size: 32px;
   font-weight: 600;
-
 }
 .movie-details {
+  width: 245px;
   display: flex;
   align-items: center;
-  padding-left: 86px;
   padding-top: 121px;
   gap: 72px;
+}
+.movie-image img{
+  padding-left: 86px;
 }
 .movie-details-content {
   flex-direction: column;
 }
+
 .movie-details-content-header h4 {
   font-size: 30px;
   color: #ebeef5;
   line-height: 32px;
   font-weight: 700;
   padding-bottom: 24px;
+}
+.movie-details-content-header{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.movie-details-content-header img{
+  width: 40px;
+  height: 40px;
+  background-color: #2a2a2a;
+  border: 2px solid #ffffff80;
+  border-radius: 50%;
+  padding: 12px;
+}
+.movie-details-content-header img:hover{
+  rotate: 45deg;
+  transition: 0.6s;
+  background-color: #12cb5c80;
 }
 .movie-details-content p {
   width: 684px;
@@ -72,14 +91,15 @@ body {
   width: 573px;
   height: 786px;
 }
+
 .movie-detail {
   padding-top: 80px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+
 }
 .detail {
-  width: 245px;
+  width: 33.33%;
   height: 64px;
   color: #ebeef5;
 }
@@ -94,4 +114,38 @@ body {
 .detail div p {
   color: #ebeef5;
   font-size: 20px;
+}
+.comments-area{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 107px;
+
+}
+.comment-input{
+  padding-left: 86px;
+}
+.comment-input input{
+  width: 810px;
+  height: 64px;
+  background-color: #000000;
+  border-radius: 12px;
+  border: 1px solid #323B54;
+  outline: none;
+  color:#323B54;
+}
+.comments-area button{
+  width: 69px;
+  height: 64px;
+  padding: 12px 20px;
+  background-color: #9B51E0;
+  border: none;
+  border-radius: 5px;
+  margin-left: 22px;
+  
+}
+
+.comment-box{
+  width: 683px;
+  height: 167px;
 }
