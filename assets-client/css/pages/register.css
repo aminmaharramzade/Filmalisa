@@ -1,13 +1,16 @@
 body {
-  background-color: var(--bgColor);
+
   
   }
 .conteiner{
-
+  background-color: var(--bgColor);
   width: 1440px;
-  height: 1016px;
+  height: 100vh;
   display: flex;
+  margin: 0 auto;
 }
+
+
 .sidebar{
   display: flex;
   flex-direction: column;
@@ -16,20 +19,29 @@ body {
   height: 1000px;
   margin-top: 8px;
   margin-left: 20px;
-  opacity: 0px;
-  background-color: black;
+  background-color: var(--bgColor);
+  box-shadow: 10px 10px 8px 20px rgba(14, 13, 13, 0.2), 0 1px 2px 0 rgba(173, 168, 168, 0.19);
   
   }
 
-.side_box1{
-  padding-top: 40px;
-
-  }
+  .side_box1{
+    margin-top: 40px;
+    
+    }
 
 .side_box2{
-  padding-top: 80px;
-  
+  display: flex;
+  justify-content: center;
+  width: 56px;
+  margin-top: 80px;
+    
+      }
+
+.side_box2:hover{
+  background-color: #58209d;
+  transition: 0.6s;
   }
+        
 .login_section{
   display: flex;
   flex-direction: column;
