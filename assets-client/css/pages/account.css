@@ -1,19 +1,13 @@
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
   body {
     background-color: #171616;
     font-family: Arial, sans-serif;
-    display: flex; /* Yatayda menü ve içerik yan yana */
-    min-height: 100vh;
+    display: flex;
+    height: 100vh;
   }
   
   aside {
-    height: 100vh; /* Yan menü tam ekran boyunda olacak */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     padding-left: 20px;
@@ -64,7 +58,7 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
-    margin-top: 160px;
+    margin-top: 60px;
   }
   
   .account-image {
@@ -92,14 +86,14 @@
   }
   
   .login-input input {
-    width: 491px;
+    width: 559px;
     height: 64px;
     border-radius: 12px;
     border: 1px solid #323b54;
     background-color: #0000001a;
     padding-left: 56px;
     color: var(--textColor);
-    font-size: 18px;
+    font-size: 14px;
   }
   
   .login-input input::placeholder {
@@ -131,7 +125,6 @@
   
   .login-btn {
     background-color: #9b51e0;
-    width: 547px;
     height: 56px;
     border-radius: 12px;
     display: flex;
