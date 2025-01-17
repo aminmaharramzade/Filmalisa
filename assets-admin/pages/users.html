@@ -5,86 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/global/global.css" />
     <link rel="stylesheet" href="../css/pages/users.css" />
-
-    <title>Document</title>
+    <title>Users</title>
   </head>
   <body>
-    <!-- mainpart -->
     <main>
-      <div class="menubar">
-        <header>
-          <div class="head-container-menu">
-            <img src="../assets/images/logo.svg" alt="" />
-            <a href="../index.html">
-              filmalisa</a>
+      <div class="section-menubar-header">
+        <!-- menu-bar -->
+        <header class="menu-bar">
+          <div class="logo-area">
+            <img src="../assets/images/logo.svg" alt="logo" />
+            <a href="../../index.html">filmalisa</a>
+          </div>
+
+          <nav class="nav-list">
+            <ul>
+              <li>
+                <img src="../assets/icons/dashboard-icon.svg" alt="" /><a
+                  href="./dashboard.html"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <img src="../assets/icons/movies-icon.svg" alt="" /><a
+                  href="movies.html"
+                  >Movies</a
+                >
+              </li>
+              <li>
+                <img src="../assets/icons/categories-icon.svg" alt="" /><a
+                  href="categories.html"
+                  >Categories</a
+                >
+              </li>
+              <li style="background-color: #58209d">
+                <img src="../assets/icons/users-icon.svg" alt="" /><a
+                  style="color: var(--textColor)"
+                  href="users.html"
+                  >Users</a
+                >
+              </li>
+              <li>
+                <img src="../assets/icons/comments-icon.svg" alt="" /><a
+                  href="comments.html"
+                  >Comments</a
+                >
+              </li>
+              <li>
+                <img src="../assets/icons/contact-icon.svg" alt="" /><a
+                  href="contact.html"
+                  >Contact us</a
+                >
+              </li>
+              <li>
+                <img src="../assets/icons/users-icon.svg" alt="" /><a
+                  href="actors.html"
+                  >Actors</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <div class="logout-area">
+            <img src="../assets/icons/logout-icon.svg" alt="" />
+            <a href="../../admin.html">Logout</a>
           </div>
         </header>
+        <!-- menu-bar -->
 
-        <div class="list-container">
-          <ul class="list-bar">
-            <li class="list-item">
-              <a href="./dashboard.html">
-                <img src="../assets/icons/dashboard-icon.svg" alt="" />
-                Dashboard
-              </a>
-            </li>
-            <li class="list-item">
-              <a href="./movies.html">
-                <img src="../assets/icons/movies-icon.svg" alt="" />
+        <!-- header -->
+        <div class="header-dashboard">
+          <header class="header container">
+            <div class="header-text-area">
+              <h2>Hi Admin</h2>
+              <h1>Users</h1>
+            </div>
 
-                Movies</a
-              >
-            </li>
-            <li class="list-item">
-              <a href="./categories.html">
-                <img
-                  src="../assets/icons/categories-icon.svg"
-                  alt=""
-                />Categories</a
-              >
-            </li>
-            <li class="list-item" style="background-color: #58209d">
-              <a style="color: var(--textColor)" href="./users.html">
-                <img src="../assets/icons/users-icon.svg" alt="" />
-                Users</a
-              >
-            </li>
-            <li class="list-item">
-              <a href="./comments.html">
-                <img src="../assets/icons/comments-icon.svg" alt="" />
-                Comments</a
-              >
-            </li>
-            <li class="list-item">
-              <a href="./contact.html">
-                <img src="../assets/icons/contact-icon.svg" alt="" />Contacts</a
-              >
-            </li>
-          </ul>
+            <div class="admin-acc-head">
+              <img src="../assets/images/test-acc-img.svg" alt="" />
+              <h4>Admin</h4>
+            </div>
+          </header>
+          <!-- header -->
         </div>
-
-        <div class="logout-area">
-          <img src="../assets/icons/logout-icon.svg" alt="" />
-          <a href="../../admin.html">
-            Logout</a>
-        </div>
-      </div>
-
-      <!-- header -->
-      <div class="header-users">
-        <header class="header-container">
-          <div class="header-text-area">
-            <h2>Hi Admin</h2>
-            <h1>Users</h1>
-          </div>
-
-          <div class="header-admin">
-            <img src="../assets/images/test-acc-img.svg" alt="" />
-            <h4>Admin</h4>
-          </div>
-        </header>
       </div>
     </main>
   </body>
 </html>
-
