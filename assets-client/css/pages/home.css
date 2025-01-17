@@ -1,5 +1,5 @@
 body {
-  background-color: #1d1d1d;
+  background-color: #1d1d1d ;
 }
 .movie1 {
   background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
@@ -93,8 +93,8 @@ body {
   color: var(--textColor);
 }
 
-.header-text-area a {
-  background: none;
+.watch-btn {
+  background: transparent;
   border-radius: 40px;
   width: 200px;
   height: 56px;
@@ -103,7 +103,10 @@ body {
   align-items: center;
   justify-content: center;
   border: 0.5px solid transparent;
-  border-image: linear-gradient(#0feffd, #ff00f5, #0feffd38) 1;
+  border-image: linear-gradient(#0feffd, #ff00f5, #0feffd38) 0.5; 
+}
+
+.watch-btn a {
   font-family: var(--robotoFont);
   color: var(--textColor);
   font-weight: 500;
