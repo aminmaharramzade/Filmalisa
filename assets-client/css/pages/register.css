@@ -2,7 +2,6 @@ body {
   background-color: var(--bgColor);
 }
 
-
 .navbar {
   width: 56px;
   height: 100vh;
@@ -84,6 +83,7 @@ body {
   align-items: center;
   margin-bottom: 40px;
 }
+
 .login-input {
   position: relative;
 }
