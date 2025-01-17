@@ -52,6 +52,11 @@ body {
   gap: 22px;
 }
 
+.form-head img {
+  width: 249px;
+  height: 214px;
+}
+
 .form-head h3 {
   font-family: var(--numansFont);
   font-weight: 400;
@@ -107,6 +112,8 @@ body {
   position: absolute;
   left: 16px;
   top: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .login-input-area {
@@ -119,6 +126,8 @@ body {
   position: absolute;
   right: 16px;
   top: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .login-btn {
