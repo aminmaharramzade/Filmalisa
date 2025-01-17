@@ -21,12 +21,12 @@ body {
   .head-container-menu {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 12.24px;
   }
   
   .head-container-menu img {
     width: 40px;
-    /* margin-right: 10px; */
+  
   }
   
   .head-container-menu a {
@@ -60,6 +60,8 @@ body {
   
   .list-bar .list-item img {
     margin-right: 10px;
+    width: 15px;
+    height: 15px;
   }
   
   .list-bar .list-item a {
@@ -76,7 +78,7 @@ body {
     background-color: #58209d;
     transition: 0.6s;
     border-radius: 4px;
-    /* padding: 5px; */
+    
   }
   
   .logout-area {
@@ -84,7 +86,7 @@ body {
     bottom: 82px;
     left: 47px;
     display: flex;
-    gap: 12px;
+    gap: 13px;
     align-items: center;
     cursor: pointer;
   }
@@ -113,13 +115,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 10px 20px; */
+   
     border-radius: 4px;
   }
   
-  /* .header-text-area {
-    margin-left: 30px;
-  } */
+  
   
   .header-text-area h2 {
     font-family: var(--ralewayFont);

@@ -14,19 +14,19 @@ main {
   height: 100vh;
 }
 
-header {
+.header {
   padding: 10px 34px;
 }
 
 .head-container-menu {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 12.24px;
 }
 
 .head-container-menu img {
   width: 40px;
-  /* margin-right: 10px; */
+  
 }
 
 .head-container-menu a {
@@ -60,6 +60,8 @@ header {
 
 .list-bar .list-item img {
   margin-right: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 .list-bar .list-item a {
@@ -84,7 +86,7 @@ header {
   bottom: 45px;
   left: 47px;
   display: flex;
-  gap: 12px;
+  gap: 13px;
   align-items: center;
   cursor: pointer;
 }
@@ -105,7 +107,7 @@ header {
 .header-users {
   flex: 1;
   position: relative;
-  /* margin-left: 30px; */
+  
   padding-top: 36px;
 }
 
@@ -113,13 +115,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
+  
   border-radius: 4px;
 }
 
-/* .header-text-area {
-  margin-left: 30px;
-} */
+
 
 .header-text-area h2 {
   font-family: var(--ralewayFont);
