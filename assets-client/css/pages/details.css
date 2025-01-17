@@ -13,7 +13,7 @@ body {
 .movie-title {
   position: absolute;
   bottom: -70px;
-  left: 110px;
+  left: 86px;
   width: 715px;
   height: 139px;
   display: flex;
@@ -158,9 +158,27 @@ body {
 
 .comment-box{
   width: 683px;
-  height: 167px;
-  padding: 25px 40px;
+  min-height: auto;
+  padding: 25px 40px 25px 40px ;
   margin-left: 86px;
   border: 2px solid #323B54;
+  color: #C3C8D4;
   border-radius: 8px;
+}
+
+.comment-box-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comment-box-desc{
+  font-size: 16px;
+  padding-top: 22px;
+ 
+}
+.comment-box-title{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
 }
