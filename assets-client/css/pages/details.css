@@ -103,17 +103,18 @@ body {
   height: 64px;
   color: #ebeef5;
 }
-.detail div {
+.detail {
   padding-top: 24px;
 }
-.detail div h4 {
+.detail h4 {
   font-size: 16px;
   color: #767e94;
   padding-bottom: 8px;
 }
-.detail div p {
+.detail p {
   color: #ebeef5;
   font-size: 20px;
+  width: 245px;
 }
 .comments-area{
   display: flex;
