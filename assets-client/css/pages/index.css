@@ -163,11 +163,6 @@
   padding-bottom: 76px;
 }
 
-.enjoy-area img {
-  width: 546px;
-  height: 410px;
-}
-
 .enjoy-text-area {
   display: flex;
   flex-direction: column;
@@ -203,11 +198,6 @@
   padding-bottom: 76px;
 }
 
-.watch-area img {
-  width: 546px;
-  height: 410px;
-}
-
 .watch-text-area {
   display: flex;
   flex-direction: column;
@@ -241,11 +231,6 @@
   gap: 12px;
   align-items: center;
   padding-bottom: 76px;
-}
-
-.kids-area img {
-  width: 546px;
-  height: 410px;
 }
 
 .kids-text-area {
@@ -396,11 +381,6 @@
   font-size: 24px;
   line-height: 30px;
   color: var(--textColor);
-}
-
-.question-accordion img {
-  width: 28px;
-  height: 28px;
 }
 
 .question-accordion img:hover {
