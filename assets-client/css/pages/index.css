@@ -383,6 +383,11 @@
   color: var(--textColor);
 }
 
+.question-accordion img {
+  width: 28px;
+  height: 28px;
+}
+
 .question-accordion img:hover {
   transition: 0.6s;
   rotate: 30deg;
