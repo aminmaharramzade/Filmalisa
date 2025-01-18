@@ -50,14 +50,14 @@
         <div class="login-input-area">
           <div class="login-input">
             <img src="../assets/icons/fullname.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" />
-            <input type="text" placeholder="profile image url" />
+            <img id="imgEye" src="../assets/icons/eyes.svg" alt="" />
+            <input id="imgInput" type="text" placeholder="profile image url" />
           </div>
 
           <div class="login-input">
             <img src="../assets/icons/password.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" />
-            <input type="text" placeholder="full name" />
+            <img id="nameEye" src="../assets/icons/eyes.svg" alt="" />
+            <input id="nameInput" type="text" placeholder="full name" />
           </div>
 
           <div class="login-input">
@@ -71,14 +71,19 @@
 
           <div class="login-input">
             <img src="../assets/icons/password.svg" alt="" />
-            <img src="../assets/icons/eyes.svg" alt="" />
-            <input type="password" placeholder="password" />
+            <img id="passwordEye" src="../assets/icons/eyes.svg" alt="" />
+            <input id="passwordInput" type="password" placeholder="password" />
           </div>
         </div>
-        <div class="login-btn">
-          <a href="">save</a>
+        <div id="saveBtn" class="login-btn">
+          <p>save</p>
         </div>
       </form>
     </div>
+
+    <div class="message">
+      <h2>Successfully</h2>
+    </div>
+    <script src="../js/account.js"></script>
   </body>
 </html>
