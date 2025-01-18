@@ -52,28 +52,29 @@
         <div class="login-input-area">
           <div class="login-input">
             <img src="../assets/icons/password-icon.svg" alt="" />
-            <img src="../assets/icons/password-eye.svg" alt="" />
-            <input type="text" placeholder="full name" />
+            <img id="nameEye" src="../assets/icons/password-eye.svg" alt="" />
+            <input id="nameInput" type="text" placeholder="full name" />
           </div>
 
           <div class="login-input">
             <img src="../assets/icons/mail-icon.svg" alt="" />
-            <input type="email" placeholder="email" />
+            <input id="emailInput" type="email" placeholder="email" />
           </div>
 
           <div class="login-input">
             <img src="../assets/icons/password-icon.svg" alt="" />
-            <img src="../assets/icons/password-eye.svg" alt="" />
-            <input type="password" placeholder="password" />
+            <img id="passwordEye" src="../assets/icons/password-eye.svg" alt="" />
+            <input id="passwordInput" type="password" placeholder="password" />
           </div>
           <a class="link-page" href="./login.html"
             >Do you have a account? Login here</a
           >
         </div>
-        <div class="login-btn">
-          <a href="../pages/home.html">register</a>
+        <div id="registerBtn" class="login-btn">
+          <p>register</p>
         </div>
       </form>
     </div>
+    <script src="../js/register.js"></script>
   </body>
 </html>
