@@ -101,7 +101,7 @@ body {
   cursor: pointer;
 }
 
-.form-login a:nth-child(1) {
+.login-btn p {
   font-family: var(--poppinsFont);
   font-weight: 400;
   line-height: 24px;
