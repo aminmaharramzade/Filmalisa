@@ -2,46 +2,6 @@ body {
   background-color: var(--bgColor);
 }
 
-.navbar {
-  width: 56px;
-  height: 100vh;
-  background-color: #1d1d1d80;
-  box-shadow: 0 40px 40px 8px #00000029;
-  backdrop-filter: blur(24px);
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-  padding-top: 40px;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  margin-left: 20px;
-  margin-top: 8px;
-}
-
-.navbar a img {
-  width: 56px;
-  height: 56px;
-}
-
-.nav-list li:hover {
-  opacity: 0.6;
-  transition: 0.6s;
-}
-
-.nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
-
-.nav-list li a img {
-  width: 19.2px;
-  height: 19.2px;
-}
-
 .form-head {
   flex: 1;
   display: flex;
