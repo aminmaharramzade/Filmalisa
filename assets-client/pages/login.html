@@ -19,20 +19,25 @@
         <div class="login-input-area">
           <div class="login-input">
             <img src="../assets/icons/mail-icon.svg" alt="" />
-            <input type="email" placeholder="email" />
+            <input id="emailInput" type="email" placeholder="email" />
           </div>
 
           <div class="login-input">
             <img src="../assets/icons/password-icon.svg" alt="" />
-            <img src="../assets/icons/password-eye.svg" alt="" />
-            <input type="password" placeholder="password" />
+            <img
+              id="passwordEye"
+              src="../assets/icons/password-eye.svg"
+              alt=""
+            />
+            <input id="passwordInput" type="password" placeholder="password" />
           </div>
           <a class="link-page" href="./register.html">Register here</a>
         </div>
-        <div class="login-btn">
-          <a href="../../index.html">login</a>
+        <div id="loginBtn" class="login-btn">
+          <p>login</p>
         </div>
       </form>
     </div>
+    <script src="../js/login.js"></script>
   </body>
 </html>
