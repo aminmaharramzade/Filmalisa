@@ -90,9 +90,9 @@ main {
   display: flex;
 }
 
-.container {
-  width: 1184px;
-  margin: 0 77px 0 24px;
+.admin-container {
+  width: 1140px;
+  margin: 0 auto
 }
 
 .header {
@@ -146,6 +146,7 @@ main {
 .header-dashboard {
   display: flex;
   flex-direction: column;
+  padding-left: 24px;
 }
 
 .dashboard-card {
