@@ -3,8 +3,8 @@ body {
 }
 
 .form-head {
-  flex: 1;
   display: flex;
+  flex: 1;
   align-items: center;
   flex-direction: column;
   margin-top: 40px;
