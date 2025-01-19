@@ -3,26 +3,43 @@
   border-radius: 8px;
   overflow: hidden;
   height: 97px;
-  
- 
+  font-family: var(--nunitosansFont);
 }
 table.movie-table thead {
-    background-color: #1e1e1e !important ;
-    color: #fff;
-    height: 48px;
-  }
-
-.admin-acc-head button{
-    margin-right:28px;
-    /* padding: 12px 24px; */
-    background-color: #9B51E0;
-    border-radius: 4px;
-    width: 92px;
-    height: 26px;
-    color: #fff;
-    border: none;
-    font-family: var(--nunitosansFont);
+  background-color: #1e1e1e !important ;
+  color: #fff;
+  height: 48px;
 }
- .modal-content {
+
+.admin-acc-head button {
+  margin-right: 28px;
+  /* padding: 12px 24px; */
+  background-color: #9b51e0;
+  border-radius: 4px;
+  width: 92px;
+  height: 26px;
+  color: #fff;
+  border: none;
+  font-family: var(--numansFont);
+}
+.modal-content {
+  padding-top: 57px;
+  padding-bottom: 119px;
+}
+.modal-content {
   background-color: #171616;
+}
+.form-control {
+  background-color: #171616;
+  border-color: #323b54;
+}
+.form-control:focus {
+  background-color: #171616;
+  border-color: #323b54;
+  border: none;
+  outline: none;
+}
+.form-check .submit{
+  background-color: #9b51e0;
+ 
 }

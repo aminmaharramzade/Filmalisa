@@ -124,6 +124,7 @@ main {
   gap: 6px;
   justify-content: space-between;
   align-items: center;
+  font-family: var(--numansFont);
 }
 
 .admin-acc-head img {
@@ -147,6 +148,7 @@ main {
   display: flex;
   flex-direction: column;
   padding-left: 24px;
+  font-family: var(--numansFont);
 }
 
 .dashboard-card {
