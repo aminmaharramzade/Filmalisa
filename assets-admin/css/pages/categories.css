@@ -12,3 +12,20 @@
     border: none;
     font-family: var(--numansFont);
   }
+  .modal-content {
+    background-color: #171616;
+  }
+  .form-control {
+    background-color: #171616;
+    border-color: #323b54;
+  }
+  .form-control:focus {
+    background-color: #171616;
+    border-color: #323b54;
+    border: none;
+    outline: none;
+  }
+   .submit{
+    background-color: #9b51e0;
+   
+  }
