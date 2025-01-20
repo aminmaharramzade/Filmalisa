@@ -177,11 +177,6 @@
   color: var(--textColor);
 }
 
-.enjoy-area img {
-  width: 546px;
-  height: 410px;
-}
-
 .enjoy-text-area p {
   font-family: var(--robotoFont);
   font-weight: 400;
@@ -215,11 +210,6 @@
   font-size: 48px;
   line-height: 62px;
   color: var(--textColor);
-}
-
-.watch-area img {
-  width: 546px;
-  height: 410px;
 }
 
 .watch-text-area p {
@@ -263,11 +253,6 @@
   font-size: 24px;
   line-height: 30px;
   color: var(--textColor);
-}
-
-.kids-area img {
-  width: 546px;
-  height: 410px;
 }
 
 .section-contact {
@@ -396,11 +381,6 @@
   font-size: 24px;
   line-height: 30px;
   color: var(--textColor);
-}
-
-.question-accordion img {
-  width: 24px;
-  height: 24px;
 }
 
 .question-accordion img:hover {
