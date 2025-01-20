@@ -32,6 +32,7 @@ body {
 .movie-title-category {
   display: flex;
   padding-bottom: 8px;
+  gap: 12px;
 }
 .movie-title-category p {
   font-size: 12px;
