@@ -1,0 +1,15 @@
+.movie-table{
+    margin-top: 30px;
+}
+
+.admin-acc-head button {
+    margin-right: 28px;
+    /* padding: 12px 24px; */
+    background-color: #9b51e0;
+    border-radius: 4px;
+    width: 92px;
+    height: 26px;
+    color: #fff;
+    border: none;
+    font-family: var(--numansFont);
+  }
