@@ -3,13 +3,8 @@
   border-radius: 8px;
   overflow: hidden;
   height: 97px;
-  font-family: var(--nunitosansFont);
 }
-table.movie-table thead {
-  background-color: #1e1e1e !important ;
-  color: #fff;
-  height: 48px;
-}
+
 
 .admin-acc-head button {
   margin-right: 28px;
