@@ -17,24 +17,29 @@
           <div class="login-input-area">
             <div class="login-input">
               <img src="./assets-admin/assets/icons/username.png" alt="" />
-              <input type="text" placeholder="username" />
+              <input id="inputName" type="text" placeholder="username" />
             </div>
 
             <div class="login-input">
               <img src="./assets-admin/assets/icons/password.png" alt="" />
               <img
+                id="passwordEye"
                 src="./assets-admin/assets/icons/password-hidden.svg"
                 alt=""
               />
-              <input type="password" placeholder="password" />
+              <input
+                id="inputPassword"
+                type="password"
+                placeholder="password"
+              />
             </div>
           </div>
-          <div class="login-btn">
-            <a href="./assets-admin/pages/dashboard.html">login</a>
+          <div id="loginBtn" class="login-btn">
+            <p>login</p>
           </div>
-      
         </form>
       </div>
     </main>
+    <script src="./assets-admin/js/admin.js"></script>
   </body>
 </html>
