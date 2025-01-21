@@ -21,6 +21,6 @@ loginBtn.addEventListener("click", function () {
     passwordInput.setAttribute("placeholder", "Required");
   }
   if (nameInput.value !== "" && passwordInput.value !== "") {
-    window.location.href = "../assets-admin/pages/dashboard.html";
+    window.location.href = "../pages/dashboard.html";
   }
 });
