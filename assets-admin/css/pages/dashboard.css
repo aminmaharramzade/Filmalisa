@@ -90,9 +90,9 @@ main {
   display: flex;
 }
 
-.container {
-  width: 1184px;
-  margin: 0 77px 0 24px;
+.admin-container {
+  width: 1140px;
+  margin: 0 auto
 }
 
 .header {
@@ -124,6 +124,7 @@ main {
   gap: 6px;
   justify-content: space-between;
   align-items: center;
+  font-family: var(--numansFont);
 }
 
 .admin-acc-head img {
@@ -146,6 +147,8 @@ main {
 .header-dashboard {
   display: flex;
   flex-direction: column;
+  padding-left: 24px;
+  font-family: var(--numansFont);
 }
 
 .dashboard-card {

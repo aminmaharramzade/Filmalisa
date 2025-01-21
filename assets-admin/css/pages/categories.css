@@ -1,0 +1,41 @@
+.movie-table{
+    margin-top: 56px;
+   
+}
+
+.admin-acc-head button {
+    margin-right: 28px;
+    background-color: #9b51e0;
+    border-radius: 4px;
+    width: 92px;
+    height: 26px;
+    color: #fff;
+    border: none;
+    font-family: var(--numansFont);
+  }
+  .modal-content {
+    background-color: #171616;
+    border-radius: 24px;
+  }
+  .input-area{
+    padding-bottom: 77px;
+    padding-top: 90px;
+  }
+
+  .form-control {
+    background-color: #171616;
+    border-color: #323b54;
+    padding: 8px 16px;
+  }
+  .form-control:focus {
+    background-color: #171616;
+    border-color: #323b54;
+    border: none;
+    outline: none;
+  }
+   .custom-btn{
+    background-color: #9b51e0;
+    width: 464px;
+    height: 59px;
+    border-radius: 12px;
+  }
