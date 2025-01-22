@@ -68,7 +68,7 @@
           </nav>
           <div class="logout-area">
             <img src="../assets/icons/logout-icon.svg" alt="" />
-            <a href="../../admin.html">Logout</a>
+            <a id="logoutBtn" href="../../admin.html">Logout</a>
           </div>
         </header>
         <!-- menu-bar -->
@@ -93,42 +93,43 @@
             <div class="dashboard-cards-area">
               <div style="width: 286px" class="dashboard-card">
                 <h3>Favorite actions</h3>
-                <h1>121</h1>
+                <h1 id="actions">0</h1>
               </div>
 
               <div style="background-color: #58209d" class="dashboard-card">
                 <h3>Users</h3>
-                <h1>10</h1>
+                <h1 id="users">0</h1>
               </div>
 
               <div class="dashboard-card">
                 <h3>Movies</h3>
-                <h1>40</h1>
+                <h1 id="movies">0</h1>
               </div>
 
               <div class="dashboard-card">
                 <h3>Comments</h3>
-                <h1>45</h1>
+                <h1 id="comments">0</h1>
               </div>
 
               <div style="width: 286px" class="dashboard-card">
                 <h3>Categories</h3>
-                <h1>12</h1>
+                <h1 id="categories">0</h1>
               </div>
 
               <div style="background-color: #58209d" class="dashboard-card">
                 <h3>Actors</h3>
-                <h1>20</h1>
+                <h1 id="actors">0</h1>
               </div>
 
               <div class="dashboard-card">
                 <h3>Contacts</h3>
-                <h1>20</h1>
+                <h1 id="contacts">0</h1>
               </div>
             </div>
           </section>
         </div>
       </div>
     </main>
+    <script src="../js/dashboard.js"></script>
   </body>
 </html>
