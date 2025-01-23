@@ -12,6 +12,7 @@ passwordEye.addEventListener("click", function () {
   }
 });
 
+
 // required login
 loginBtn.addEventListener("click", function () {
   if (nameInput.value === "") {
