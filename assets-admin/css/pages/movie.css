@@ -20,19 +20,19 @@
 .modal-content {
   padding-top: 57px;
   padding-bottom: 119px;
-}
-.modal-content {
   background-color: #171616;
 }
 .form-control {
   background-color: #171616;
   border-color: #323b54;
+  color: #fff; /* Set input text color to white */
 }
 .form-control:focus {
   background-color: #171616;
   border-color: #323b54;
   border: none;
   outline: none;
+  color: #fff; /* Set input text color to white */
 }
 .form-check .submit{
   background-color: #9b51e0;
