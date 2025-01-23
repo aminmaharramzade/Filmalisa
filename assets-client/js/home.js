@@ -1,41 +1,123 @@
-const bgSlider = document.querySelector('#bgSlider');
-const dotOne = document.querySelector('#dotOne');
-const dotTwo = document.querySelector('#dotTwo');
-const dotThree = document.querySelector('#dotThree');
+const bgSlider = document.querySelector("#bgSlider");
+const dotOne = document.querySelector("#dotOne");
+const dotTwo = document.querySelector("#dotTwo");
+const dotThree = document.querySelector("#dotThree");
+const headerTextArea = document.querySelector(".header-text-area");
 
-const images = [
-  '../assets/images/home-bg.svg',
-  '../assets/images/home-bg.svg', 
-  '../assets/images/home-bg.svg'  
-];
+const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
+const token = localStorage.getItem("accessToken");
 
-let currentIndex = 0;
+let movies = [];
 
 const updateBackgroundImage = (index) => {
-  bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${images[index]})`;
-  dotOne.src = index === 0 ? '../assets/icons/active-dot-icon.svg' : '../assets/icons/deactive-dot-icon.svg';
-  dotTwo.src = index === 1 ? '../assets/icons/active-dot-icon.svg' : '../assets/icons/deactive-dot-icon.svg';
-  dotThree.src = index === 2 ? '../assets/icons/active-dot-icon.svg' : '../assets/icons/deactive-dot-icon.svg';
+  const movie = movies[index];
+  bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${movie.cover_url})`;
+  headerTextArea.innerHTML = `
+    <h4>${movie.category.name}</h4>
+    <ul>
+      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+    </ul>
+    <h1>${movie.title}</h1>
+    <p>${movie.overview}</p>
+    <div class="watch-btn"><a href="${movie.watch_url}">Watch now</a></div>
+  `;
+  dotOne.src =
+    index === 0
+      ? "../assets/icons/active-dot-icon.svg"
+      : "../assets/icons/deactive-dot-icon.svg";
+  dotTwo.src =
+    index === 1
+      ? "../assets/icons/active-dot-icon.svg"
+      : "../assets/icons/deactive-dot-icon.svg";
+  dotThree.src =
+    index === 2
+      ? "../assets/icons/active-dot-icon.svg"
+      : "../assets/icons/deactive-dot-icon.svg";
 };
 
-dotOne.addEventListener('click', () => {
+dotOne.addEventListener("click", () => {
   currentIndex = 0;
   updateBackgroundImage(currentIndex);
 });
 
-dotTwo.addEventListener('click', () => {
+dotTwo.addEventListener("click", () => {
   currentIndex = 1;
   updateBackgroundImage(currentIndex);
 });
 
-dotThree.addEventListener('click', () => {
+dotThree.addEventListener("click", () => {
   currentIndex = 2;
   updateBackgroundImage(currentIndex);
 });
 
-updateBackgroundImage(currentIndex);
-
+let currentIndex = 0;
+// slide vaxti
 setInterval(() => {
-  currentIndex = (currentIndex + 1) % images.length;
+  currentIndex = (currentIndex + 1) % movies.length;
   updateBackgroundImage(currentIndex);
 }, 5000);
+
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data.data);
+
+    movies = data.data.sort(() => 0.5 - Math.random()).slice(0, 3);
+    updateBackgroundImage(currentIndex);
+
+    const actionCardArea = document.querySelector(".action-card-area");
+    const comedyCardArea = document.querySelector(".comedy-card-area");
+    actionCardArea.innerHTML = "";
+    comedyCardArea.innerHTML = "";
+
+    data.data.forEach((movie) => {
+      const card = document.createElement("div");
+      card.classList.add("action-card");
+      card.innerHTML = `
+        <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <h4>${movie.category.name}</h4>
+        <h1>${movie.title}</h1>
+      `;
+      if (movie.category.name === "Action") {
+        comedyCardArea.appendChild(card);
+      } else {
+        actionCardArea.appendChild(card);
+      }
+    });
+
+    data.data.forEach((movie) => {
+      const card = document.createElement("div");
+      card.classList.add("comedy-card");
+      card.innerHTML = `
+        <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <h4>${movie.category.name}</h4>
+        <h1>${movie.title}</h1>
+      `;
+      if (movie.category.name === "Comedy") {
+        actionCardArea.appendChild(card);
+      } else {
+        comedyCardArea.appendChild(card);
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+fetchData("movies");
