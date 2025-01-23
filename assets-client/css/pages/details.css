@@ -29,9 +29,11 @@ body {
 .movie-title-content {
   padding: 40px 0 35px 40px;
 }
+
 .movie-title-category {
   display: flex;
   padding-bottom: 8px;
+  gap: 12px;
 }
 .movie-title-category p {
   font-size: 12px;
@@ -48,7 +50,7 @@ body {
   padding-top: 121px;
   gap: 72px;
 }
-.movie-image img{
+.movie-image img {
   padding-left: 86px;
 }
 .movie-details-content {
@@ -62,20 +64,64 @@ body {
   font-weight: 700;
   padding-bottom: 24px;
 }
-.movie-details-content-header{
+
+.movie-details-watch-link {
+  display: flex;
+  gap: 20px;
+}
+
+.movie-details-watch-link h6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000a6;
+  backdrop-filter: blur(24px);
+  color: #ffad49;
+  width: 102px;
+  height: 32px;
+  border-radius: 8px;
+  font-family: var(--poppinsFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.movie-details-content-header {
   display: flex;
   justify-content: space-between;
-  
 }
-.movie-details-content-header img{
+
+.rate-area {
+  margin-top: 32px;
+  display: flex;
+  gap: 4px;
+  width: 59px;
+  height: 32px;
+  background-color: #000000a6;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.rate-area h5 {
+  font-family: var(--poppinsFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffad49;
+}
+
+.movie-details-content-header img {
   width: 40px;
   height: 40px;
   background-color: #2a2a2a;
   border: 2px solid #ffffff80;
   border-radius: 50%;
   padding: 12px;
+  cursor: pointer;
 }
-.movie-details-content-header img:hover{
+.movie-details-content-header img:hover {
   rotate: 45deg;
   transition: 0.6s;
   background-color: #12cb5c80;
@@ -93,10 +139,8 @@ body {
 }
 
 .movie-detail {
-  padding-top: 80px;
   display: flex;
   flex-wrap: wrap;
-
 }
 .detail {
   width: 33.33%;
@@ -116,69 +160,118 @@ body {
   font-size: 20px;
   width: 245px;
 }
-.comments-area{
+.comments-area {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding-top: 107px;
-
 }
-.comment-input{
+.comment-input {
   padding-left: 86px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 85px;
 }
-.comment-input input{
+.comment-input input {
   width: 810px;
   height: 64px;
   background-color: #000000;
   font-size: 14px;
   border-radius: 12px;
-  border: 1px solid #323B54;
+  border: 1px solid #323b54;
   outline: none;
-  color:#475069;
+  color: #475069;
   padding-left: 56px;
+  color: #ffffff;
+  font-family: var(--poppinsFont);
 }
-.comments-area button{
+
+.comment-input input::placeholder {
+  font-family: var(--poppinsFont);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #475069;
+}
+.comments-area button {
   width: 69px;
   height: 64px;
   padding: 12px 20px;
-  background-color: #9B51E0;
+  background-color: #9b51e0;
   border: none;
   border-radius: 5px;
   margin-left: 22px;
-  
+  cursor: pointer;
 }
-.comment-input img{
+
+.comments-area button:hover {
+  background: none;
+  transition: 0.6s;
+}
+
+.comment-input img {
   width: 35px;
   height: 35px;
 }
 
-.comment-box{
+.top-cast-area {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-left: -10px;
+  margin-top: 42px;
+}
+
+.top-cast-area h1 {
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.actors-area {
+  display: flex;
+  gap: 24px;
+}
+
+.actors-card img {
+  width: 128px;
+  height: 162px;
+}
+
+.actors-card p {
+  font-family: var(--robotoFont);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  width: 128px;
+  height: 24px;
+}
+
+.comment-box {
   width: 683px;
   min-height: auto;
-  padding: 25px 40px 25px 40px ;
+  padding: 25px 40px 25px 40px;
   margin-left: 86px;
-  border: 2px solid #323B54;
-  color: #C3C8D4;
+  border: 2px solid #323b54;
+  color: #c3c8d4;
   border-radius: 8px;
 }
 
-.comment-box-header{
+.comment-box-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.comment-box-desc{
+.comment-box-desc {
   font-size: 16px;
   padding-top: 22px;
- 
 }
-.comment-box-title{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  
+.comment-box-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
