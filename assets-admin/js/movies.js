@@ -1,12 +1,7 @@
 const category = document.querySelector(`#category`);
-const movieTableBody = document.querySelector('.movie-table tbody');
-const submitButton = document.querySelector('.submit button');
-const modal = document.querySelector('#exampleModal');
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
 const token = localStorage.getItem('accessToken');
-let editMode = false;
-let editRow = null;
 
 async function fetchData(endpoint) {
   try {
