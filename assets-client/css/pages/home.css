@@ -3,7 +3,8 @@ body {
 }
 .movie1 {
   background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
-    url(../../assets/images/home-bg.svg);
+    url("");
+    object-fit: cover;
   background-repeat: no-repeat;
   height: 648px;
   background-size: 100%;
