@@ -3,7 +3,7 @@ const passwordInput = document.querySelector(`#inputPassword`);
 const nameInput = document.querySelector(`#inputName`);
 const loginBtn = document.querySelector(`#loginBtn`);
 
-// password private
+// Toggle password visibility
 passwordEye.addEventListener("click", function () {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -12,8 +12,7 @@ passwordEye.addEventListener("click", function () {
   }
 });
 
-
-// required login
+// Required login validation
 loginBtn.addEventListener("click", function () {
   if (nameInput.value === "") {
     nameInput.setAttribute("placeholder", "Required");
@@ -22,29 +21,37 @@ loginBtn.addEventListener("click", function () {
     passwordInput.setAttribute("placeholder", "Required");
   }
   if (nameInput.value !== "" && passwordInput.value !== "") {
-    window.location.href = "../assets-admin/pages/dashboard.html";
+    fetchData("login", nameInput.value, passwordInput.value);
   }
 });
 
-const url = "https://api.sarkhanrahimli.dev/api/filmalisa/auth/admin/login";
+const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/auth/admin";
 
-const options = {
-  method: "POST",  
-  headers: {
-    "Content-Type":"application/json"
+async function fetchData(endpoint, email, password) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (nameInput.value === email && passwordInput.value === password) {
+      const accessToken = data.data.tokens.access_token;
+      localStorage.setItem("accessToken", accessToken);
+      window.location.href = "assets-admin/pages/dashboard.html";
+    }
+  } catch (error) {
+    console.error("Error:", error);
   }
-};
-
-const myPromise = fetch(url, options);
-
-myPromise
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
-
+}
