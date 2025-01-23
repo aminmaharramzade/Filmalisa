@@ -43,5 +43,4 @@ async function fetchData(endpoint) {
   }
 }
 
-
 fetchData("dashboard");

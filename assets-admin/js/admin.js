@@ -46,9 +46,7 @@ async function fetchData(endpoint, email, password) {
 
     const data = await response.json();
 
-    // If the credentials are valid
     if (nameInput.value === email && passwordInput.value === password) {
-      // Store the access token in localStorage
       const accessToken = data.data.tokens.access_token;
       localStorage.setItem("accessToken", accessToken);
       window.location.href = "assets-admin/pages/dashboard.html";
