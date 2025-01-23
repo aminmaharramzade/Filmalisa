@@ -15,6 +15,7 @@ const comments = document.querySelector(`#comments`)
 const actors = document.querySelector(`#actors`)
 const contacts =  document.querySelector(`#contacts`)
 
+
 async function fetchData(endpoint) {
   try {
     const response = await fetch(`${baseURL}/${endpoint}`, {
@@ -42,6 +43,5 @@ async function fetchData(endpoint) {
     console.error("Error:", error);
   }
 }
-
 
 fetchData("dashboard");
