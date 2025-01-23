@@ -53,7 +53,6 @@ function addMovieToTable(movie) {
   `;
   movieTableBody.appendChild(row);
 
-
   row.querySelector('.delete-btn').addEventListener('click', function() {
     row.remove();
   });
