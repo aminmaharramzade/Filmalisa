@@ -20,11 +20,11 @@ async function fetchData(endpoint) {
 
     function displayMovies(movies) {
       const searchCardArea = document.querySelector("#searchArea");
-      searchCardArea.innerHTML = ""; // Clear previous results
+      searchCardArea.innerHTML = "";
+
       movies.forEach((movie) => {
         const card = document.createElement("div");
         card.classList.add("search-card");
-
 
         // ! rating hesablama
         const rating = Math.round(movie.imdb);
@@ -47,6 +47,9 @@ async function fetchData(endpoint) {
               '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
           }
         }
+        card.addEventListener("click", () => {
+          window.location.href = `../pages/details.html?id=${movie.id}`;
+        });
 
         card.innerHTML = `
           <div class="gradient-overlay"></div>
