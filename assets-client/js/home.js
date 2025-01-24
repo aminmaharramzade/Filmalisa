@@ -32,13 +32,14 @@ const updateBackgroundImage = (index) => {
     }
   }
   bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${movie.cover_url})`;
+  const movieOverview = movie.overview.length > 200 ? movie.overview.slice(0, 200) + "..." : movie.overview;
   headerTextArea.innerHTML = `
     <h4>${movie.category.name}</h4>
     <ul>
       ${starIcon}
     </ul>
     <h1>${movie.title}</h1>
-    <p>${movie.overview}</p>
+    <p>${movieOverview}</p>
     <div class="watch-btn"><a href="${movie.watch_url}">Watch now</a></div>
   `;
   dotOne.src =
