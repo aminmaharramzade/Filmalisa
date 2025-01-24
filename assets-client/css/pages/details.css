@@ -2,8 +2,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .detail-hero {
-  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
-    url("");
+  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url("");
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
@@ -11,6 +10,7 @@ body {
   width: 100%;
   display: flex;
   position: relative;
+  object-fit: cover;
 }
 
 .movie-title {
@@ -28,6 +28,7 @@ body {
   border-radius: 24px;
   gap: 8px;
   color: #fff;
+  padding-right: 40px;
 }
 .movie-title-content {
   padding: 40px 0 35px 40px;
@@ -65,12 +66,14 @@ body {
   color: #ebeef5;
   line-height: 32px;
   font-weight: 700;
-  padding-bottom: 24px;
 }
 
 .movie-details-watch-link {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .movie-details-watch-link h6 {
@@ -88,6 +91,9 @@ body {
   font-size: 14px;
   line-height: 24px;
   cursor: pointer;
+  text-align: center;
+  padding: 6px;
+  margin-right: 4px;
 }
 
 .movie-details-content-header {
@@ -157,6 +163,7 @@ body {
   font-size: 16px;
   color: #767e94;
   padding-bottom: 8px;
+  width: 245px;
 }
 .detail p {
   color: #ebeef5;
@@ -277,4 +284,28 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0d5640cc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal p {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
 }
