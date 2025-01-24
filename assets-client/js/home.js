@@ -11,15 +11,31 @@ let movies = [];
 
 const updateBackgroundImage = (index) => {
   const movie = movies[index];
+  const rating = Math.round(movie.imdb);
+  let starIcon = "";
+  let filledStars = 0;
+
+  if (rating >= 1 && rating <= 3) {
+    filledStars = 2;
+  } else if (rating >= 4 && rating <= 5) {
+    filledStars = 3;
+  } else if (rating >= 6 && rating <= 7) {
+    filledStars = 4;
+  } else if (rating >= 8 && rating <= 10) {
+    filledStars = 5;
+  }
+
+  for (let i = 0; i < 5; i++) {
+    if (i < filledStars) {
+      starIcon +=
+        '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
+    }
+  }
   bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${movie.cover_url})`;
   headerTextArea.innerHTML = `
     <h4>${movie.category.name}</h4>
     <ul>
-      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
-      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
-      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
-      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
-      <li><img src="../assets/icons/star-raiting.svg" alt="" /></li>
+      ${starIcon}
     </ul>
     <h1>${movie.title}</h1>
     <p>${movie.overview}</p>
@@ -99,6 +115,9 @@ async function fetchData(endpoint) {
       } else {
         actionCardArea.appendChild(card);
       }
+      card.addEventListener("click", () => {
+        window.location.href = `../pages/details.html?id=${movie.id}`;
+      });
     });
 
     data.data.forEach((movie) => {
@@ -114,6 +133,9 @@ async function fetchData(endpoint) {
       } else {
         comedyCardArea.appendChild(card);
       }
+      card.addEventListener("click", () => {
+        window.location.href = `../pages/details.html?id=${movie.id}`;
+      });
     });
   } catch (error) {
     console.error("Error:", error);

@@ -2,8 +2,11 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .detail-hero {
-  background-image: url(../../assets/images/details.svg);
+  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
+    url("");
   background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
   height: 648px;
   width: 100%;
   display: flex;
