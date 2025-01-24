@@ -1,7 +1,33 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
 const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
 
-// ...existing code...
+function updateSearchPlusIcon(isFavourite) {
+  const searchPlusIcon = document.querySelector(".search-plus img");
+  if (isFavourite) {
+    searchPlusIcon.style.backgroundColor = "#12cb5c80";
+    searchPlusIcon.style.rotate = "45deg";
+  } else {
+    searchPlusIcon.style.backgroundColor = "";
+    searchPlusIcon.style.rotate = "";
+  }
+}
+
+function toggleFavourite(movie) {
+  let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+  const movieIndex = favourites.findIndex((fav) => fav.id === movie.id);
+
+  if (movieIndex > -1) {
+    favourites.splice(movieIndex, 1);
+    showModal("Movie removed from favourites!");
+    document.querySelector(".modal").style.backgroundColor = "rgb(156, 51, 51)";
+  } else {
+    favourites.push(movie);
+    showModal("Movie added to favourites!");
+  }
+
+  localStorage.setItem("favourites", JSON.stringify(favourites));
+  updateSearchPlusIcon(movieIndex === -1);
+}
 
 async function fetchMovieDetails(id) {
   try {
@@ -57,9 +83,33 @@ async function fetchMovieDetails(id) {
       `;
       actorsArea.appendChild(actorCard);
     });
+
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    const isFavourite = favourites.some((fav) => fav.id === data.data.id);
+    updateSearchPlusIcon(isFavourite);
+
+    document.querySelector(".search-plus img").addEventListener("click", () => {
+      toggleFavourite(data.data);
+    });
+
   } catch (error) {
     console.error("Error:", error);
   }
+}
+
+function showModal(message) {
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>${message}</p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  setTimeout(() => {
+    modal.remove();
+  }, 1000);
 }
 
 const urlParams = new URLSearchParams(window.location.search);
