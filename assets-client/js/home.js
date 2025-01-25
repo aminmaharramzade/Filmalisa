@@ -32,7 +32,10 @@ const updateBackgroundImage = (index) => {
     }
   }
   bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${movie.cover_url})`;
-  const movieOverview = movie.overview.length > 200 ? movie.overview.slice(0, 200) + "..." : movie.overview;
+  const movieOverview =
+    movie.overview.length > 200
+      ? movie.overview.slice(0, 200) + "..."
+      : movie.overview;
   headerTextArea.innerHTML = `
     <h4>${movie.category.name}</h4>
     <ul>
@@ -108,8 +111,12 @@ async function fetchData(endpoint) {
       card.classList.add("action-card");
       card.innerHTML = `
         <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <div class="action-card-text">
+        <div class=bg-category>
         <h4>${movie.category.name}</h4>
+        </div>
         <h1>${movie.title}</h1>
+        </div>
       `;
       if (movie.category.name === "Action") {
         comedyCardArea.appendChild(card);
@@ -126,8 +133,12 @@ async function fetchData(endpoint) {
       card.classList.add("comedy-card");
       card.innerHTML = `
         <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <div class="comedy-card-text">
+        <div class=bg-category>
         <h4>${movie.category.name}</h4>
+        </div>
         <h1>${movie.title}</h1>
+        </div>
       `;
       if (movie.category.name === "Comedy") {
         actionCardArea.appendChild(card);
