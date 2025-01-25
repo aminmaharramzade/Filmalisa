@@ -45,10 +45,42 @@ function addCategoryToTable(category) {
     </td>
   `;
   categoryTableBody.appendChild(row);
-
-
- 
-
 }
+// POST 
+document.querySelector('.movies-form').addEventListener('submit', async (event) => {
+  event.preventDefault(); 
+
+  const categoryName = document.getElementById('title').value.trim(); 
+
+  if (!categoryName) {
+    alert("Please enter a category name.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/categories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: categoryName }),
+    });
+
+    if (response.ok) {
+      const  data = await response.json();
+      addCategoryToTable(data);
+      alert("Category successfully added!");
+    } else {
+      alert(`Server Error: ${response.status}`);
+    }
+  } catch (error) {
+    alert("Request Error: " + error.message);
+  }
+
+  
+  document.getElementById('title').value = ''; 
+  const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+  modal.hide(); 
+});
 
 fetchData('categories'); 
