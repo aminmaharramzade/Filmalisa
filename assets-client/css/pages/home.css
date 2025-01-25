@@ -1,10 +1,9 @@
 body {
-  background-color: #1d1d1d ;
+  background-color: #1d1d1d;
 }
 .movie1 {
-  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc),
-    url("");
-    object-fit: cover;
+  background-image: linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url("");
+  object-fit: cover;
   background-repeat: no-repeat;
   height: 648px;
   background-size: 100%;
@@ -105,7 +104,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 0.5px solid transparent;
-  border-image: linear-gradient(#0feffd, #ff00f5, #0feffd38) 0.5; 
+  border-image: linear-gradient(#0feffd, #ff00f5, #0feffd38) 0.5;
 }
 
 .watch-btn a {
@@ -166,9 +165,15 @@ body {
   cursor: pointer;
 }
 
-.action-card h1 {
+.action-card-text {
   position: absolute;
-  bottom: 20px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.action-card h1 {
   font-family: var(--robotoFont);
   font-weight: 500;
   font-size: 24px;
@@ -177,19 +182,22 @@ body {
 }
 
 .action-card h4 {
-  position: absolute;
-  bottom: 120px;
-  background-color: #1d1d1d80;
-  padding: 4px 8px 4px 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
   font-family: var(--robotoFont);
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   color: #0feffd;
-  text-align: center;
 }
+
+.bg-category {
+  background-color: #1d1d1d80;
+  padding: 4px 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  display: inline-block;
+  margin-right: auto;
+}
+
 .container {
   padding-left: 56px;
 }
@@ -233,9 +241,16 @@ body {
   cursor: pointer;
 }
 
-.comedy-card h1 {
+.comedy-card-text {
   position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   bottom: 40px;
+}
+
+.comedy-card h1 {
   font-family: var(--robotoFont);
   font-weight: 500;
   font-size: 32px;
@@ -245,9 +260,6 @@ body {
 }
 
 .comedy-card h4 {
-  position: absolute;
-  bottom: 120px;
-  background-color: #1d1d1d80;
   padding: 4px 8px 4px 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -256,7 +268,6 @@ body {
   font-size: 14px;
   line-height: 16px;
   color: #0feffd;
-  text-align: center;
 }
 
 .background-image {
