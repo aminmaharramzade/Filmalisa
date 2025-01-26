@@ -138,3 +138,9 @@ main {
   line-height: 13px;
   color: var(--textColor);
 }
+
+.movie-table {
+  margin-top: 100px;
+  overflow: hidden;
+  height: 97px;
+}
