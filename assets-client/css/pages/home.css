@@ -279,3 +279,11 @@ body {
   object-fit: cover;
   z-index: -1;
 }
+
+.action-card ul {
+  display: flex;
+}
+
+.comedy-card ul {
+  display: flex;
+}
