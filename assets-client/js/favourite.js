@@ -56,11 +56,13 @@ async function fetchFavourites(endpoint) {
         alt="${movie.title}"
         class="background-image"
       />
+       <div class="favourite-card-text">
       <ul class="star-rating">
         ${starIcon}
       </ul>
 
       <h1>${movie.title}</h1>
+      </div>
     `;
 
       favouriteArea.appendChild(card);
