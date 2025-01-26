@@ -107,6 +107,26 @@ async function fetchData(endpoint) {
     comedyCardArea.innerHTML = "";
 
     data.data.forEach((movie) => {
+      const rating = Math.round(movie.imdb);
+      let starIcon = "";
+      let filledStars = 0;
+
+      if (rating >= 1 && rating <= 3) {
+        filledStars = 2;
+      } else if (rating >= 4 && rating <= 5) {
+        filledStars = 3;
+      } else if (rating >= 6 && rating <= 7) {
+        filledStars = 4;
+      } else if (rating >= 8 && rating <= 10) {
+        filledStars = 5;
+      }
+
+      for (let i = 0; i < 5; i++) {
+        if (i < filledStars) {
+          starIcon +=
+            '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
+        }
+      }
       const card = document.createElement("div");
       card.classList.add("action-card");
       card.innerHTML = `
@@ -115,6 +135,7 @@ async function fetchData(endpoint) {
         <div class=bg-category>
         <h4>${movie.category.name}</h4>
         </div>
+        <ul>${starIcon}</ul>
         <h1>${movie.title}</h1>
         </div>
       `;
@@ -129,6 +150,26 @@ async function fetchData(endpoint) {
     });
 
     data.data.forEach((movie) => {
+      const rating = Math.round(movie.imdb);
+      let starIcon = "";
+      let filledStars = 0;
+
+      if (rating >= 1 && rating <= 3) {
+        filledStars = 2;
+      } else if (rating >= 4 && rating <= 5) {
+        filledStars = 3;
+      } else if (rating >= 6 && rating <= 7) {
+        filledStars = 4;
+      } else if (rating >= 8 && rating <= 10) {
+        filledStars = 5;
+      }
+
+      for (let i = 0; i < 5; i++) {
+        if (i < filledStars) {
+          starIcon +=
+            '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
+        }
+      }
       const card = document.createElement("div");
       card.classList.add("comedy-card");
       card.innerHTML = `
@@ -137,6 +178,7 @@ async function fetchData(endpoint) {
         <div class=bg-category>
         <h4>${movie.category.name}</h4>
         </div>
+        <ul>${starIcon}</ul>
         <h1>${movie.title}</h1>
         </div>
       `;
