@@ -12,6 +12,32 @@ body {
   position: relative;
   object-fit: cover;
 }
+.movie-image {
+  position: relative;
+}
+
+.movie-image-play {
+  position: relative;
+  cursor: pointer;
+}
+
+.play-icon {
+  position: absolute;
+  cursor: pointer;
+  display: none;
+  top: 42%;
+  left: 48%;
+}
+
+.movie-image-play:hover .play-icon {
+  display: block;
+}
+
+.movie-image-play:hover .movie-image img {
+  opacity: 0.6;
+  transition: 0.6s;
+  transform: scale(1.01);
+}
 
 .movie-title {
   position: absolute;
@@ -308,4 +334,91 @@ body {
   margin: 0;
   font-size: 16px;
   color: #fff;
+}
+
+.play-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.play-modal-content {
+  position: relative;
+  width: 968px;
+  height: 607px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 64px;
+  padding-bottom: 26px;
+}
+
+.play-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.play-modal-details {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.play-modal-details h1 {
+  font-size: 30px;
+  font-family: var(--poppinsFont);
+  font-family: 700;
+  line-height: 32px;
+  letter-spacing: -1.5%;
+  margin-bottom: 20px;
+}
+
+.play-btn-area img {
+  /* position: absolute; */
+  width: 21px;
+  height: 24px;
+  z-index: 99;
+  left: 26px;
+  bottom: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.play-btn-area a {
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: var(--poppinsFont);
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.play-btn-area {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  width: 92px;
+  position: relative;
+}
+
+.play-btn-area:hover {
+  background: #ffffff80;
+  transition: 1s;
 }
