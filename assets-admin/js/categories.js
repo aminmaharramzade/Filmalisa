@@ -22,7 +22,8 @@ async function fetchData(endpoint) {
 
     const data = await response.json();
     console.log(data.data);
-    data.data.forEach(item => {
+    const sortData = data.data.sort((a, b) => a.id - b.id);
+    sortData.forEach(item => {
       addCategoryToTable(item);
     });
   } catch (error) {
@@ -58,9 +59,10 @@ document.querySelector('.movies-form').addEventListener('submit', async (event) 
   }
 
   try {
-    const response = await fetch(`${baseURL}/categories`, {
+    const response = await fetch(`${baseURL}/category`, {
       method: "POST",
       headers: {
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name: categoryName }),
@@ -68,7 +70,7 @@ document.querySelector('.movies-form').addEventListener('submit', async (event) 
 
     if (response.ok) {
       const  data = await response.json();
-      addCategoryToTable(data);
+      addCategoryToTable(data.data);
       alert("Category successfully added!");
     } else {
       alert(`Server Error: ${response.status}`);

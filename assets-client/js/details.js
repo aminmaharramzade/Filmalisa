@@ -1,0 +1,119 @@
+const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
+
+function updateSearchPlusIcon(isFavourite) {
+  const searchPlusIcon = document.querySelector(".search-plus img");
+  if (isFavourite) {
+    searchPlusIcon.style.backgroundColor = "#12cb5c80";
+    searchPlusIcon.style.rotate = "45deg";
+  } else {
+    searchPlusIcon.style.backgroundColor = "";
+    searchPlusIcon.style.rotate = "";
+  }
+}
+
+function toggleFavourite(movie) {
+  let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+  const movieIndex = favourites.findIndex((fav) => fav.id === movie.id);
+
+  if (movieIndex > -1) {
+    favourites.splice(movieIndex, 1);
+    showModal("Movie removed from favourites!");
+    document.querySelector(".modal").style.backgroundColor = "rgb(156, 51, 51)";
+  } else {
+    favourites.push(movie);
+    showModal("Movie added to favourites!");
+  }
+
+  localStorage.setItem("favourites", JSON.stringify(favourites));
+  updateSearchPlusIcon(movieIndex === -1);
+}
+
+async function fetchMovieDetails(id) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    const movieDetails = document.querySelector(".movie-image img");
+    movieDetails.src = data.data.cover_url;
+    const overview = document.querySelector(".under-watch p");
+    overview.textContent = data.data.overview;
+    const titleLink = document.querySelector(".movie-details-watch-link h4");
+    titleLink.textContent = data.data.title;
+    const titleWatchLInk = document.querySelector(
+      ".movie-details-watch-link h6"
+    );
+    titleWatchLInk.addEventListener(`click`, function () {
+      window.location.href = `${data.data.watch_url}`;
+    });
+    const rateImdb = document.querySelector(".rate-area h5");
+    rateImdb.textContent = data.data.imdb;
+    const dateMovie = document.querySelector("#dateMovie");
+    dateMovie.textContent = data.data.created_at.slice(0, 10);
+    const runTime = document.querySelector("#runTime");
+    runTime.textContent = `${data.data.run_time_min} min`;
+    const genres = document.querySelector("#genres");
+    genres.textContent = data.data.category.name;
+    const bgMovie = document.querySelector(".detail-hero");
+    bgMovie.style.backgroundImage = `url(${data.data.cover_url})`;
+    const mainGenre = document.querySelector("#mainGenre");
+    mainTitle.textContent = data.data.category.name;
+    const mainName = document.querySelector("#mainName");
+    mainName.textContent = data.data.title;
+
+    const actorsArea = document.querySelector("#actorsArea");
+    data.data.actors.forEach((actor) => {
+      const actorCard = document.createElement("div");
+      actorCard.classList.add("actors-card");
+      actorCard.innerHTML = `
+         <img src="${actor.img_url}" />
+         <p>${actor.name}</p>
+         <p>${actor.surname}</p>
+      `;
+      actorsArea.appendChild(actorCard);
+    });
+
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    const isFavourite = favourites.some((fav) => fav.id === data.data.id);
+    updateSearchPlusIcon(isFavourite);
+
+    document.querySelector(".search-plus img").addEventListener("click", () => {
+      toggleFavourite(data.data);
+    });
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function showModal(message) {
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>${message}</p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  setTimeout(() => {
+    modal.remove();
+  }, 1000);
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const movieId = urlParams.get("id");
+if (movieId) {
+  fetchMovieDetails(movieId);
+}

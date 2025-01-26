@@ -31,6 +31,7 @@ body {
   display: flex;
   margin-right: 9px;
   gap: 18px;
+  align-items: center;
 }
 
 .search-input input {
@@ -123,6 +124,7 @@ body {
   width: 292px;
   height: 440px;
   background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
+  cursor: pointer;
 }
 
 .gradient-overlay {

@@ -79,9 +79,8 @@ body {
   width: 504px;
   height: 736px;
   padding-left: 24px;
-  background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc),
-    url(../../assets/images/falcon-movie.svg);
   background-size: 100%;
+  cursor: pointer;
 }
 
 .favourite-card h1 {
@@ -93,6 +92,8 @@ body {
   line-height: 40px;
   color: var(--textColor);
   width: 456px;
+  margin-left: 24px;
+  z-index: 4;
 }
 
 .favourite-card h4 {
@@ -108,4 +109,16 @@ body {
   line-height: 16px;
   color: #0feffd;
   text-align: center;
+  margin-left: 24px;
+  z-index: 3;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
+  z-index: 1;
 }

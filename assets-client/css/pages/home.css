@@ -10,6 +10,7 @@ body {
   background-size: 100%;
   display: flex;
   position: relative;
+  background-position: center;
 }
 
 .navbar {
@@ -162,6 +163,7 @@ body {
   height: 440px;
   padding-left: 24px;
   background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
+  cursor: pointer;
 }
 
 .action-card h1 {
@@ -176,7 +178,7 @@ body {
 
 .action-card h4 {
   position: absolute;
-  bottom: 100px;
+  bottom: 120px;
   background-color: #1d1d1d80;
   padding: 4px 8px 4px 8px;
   border-top-right-radius: 8px;
@@ -228,6 +230,7 @@ body {
   height: 736px;
   padding-left: 24px;
   background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
+  cursor: pointer;
 }
 
 .comedy-card h1 {

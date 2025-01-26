@@ -20,14 +20,18 @@
         <ul class="nav-list">
           <li>
             <a href="./home.html"
-              ><img src="../assets/icons/home-home-icon.svg" alt=""
+              ><img src="../assets/icons/home-icon.svg" alt=""
             /></a>
           </li>
           <li>
-            <a href="./search.html"><img src="../assets/icons/movie-icon.svg" alt="" /></a>
+            <a href="./search.html"
+              ><img src="../assets/icons/movie-icon.svg" alt=""
+            /></a>
           </li>
           <li>
-            <a href="./favourite.html"><img src="../assets/icons/star-icon.svg" alt="" /></a>
+            <a href="./favourite.html"
+              ><img src="../assets/icons/star-icon.svg" alt=""
+            /></a>
           </li>
           <li>
             <a href="./account.html"
@@ -39,11 +43,11 @@
       <div class="movie-title">
         <div class="movie-title-content">
           <div class="movie-title-category">
-            <p>MaileHereko</p>
+            <p id="mainTitle"></p>
             <p>/</p>
-            <p>TV Shows</p>
+            <p>Movie</p>
           </div>
-          <h4>lost In space</h4>
+          <h4 id="mainName">lost In space</h4>
         </div>
       </div>
     </div>
@@ -83,60 +87,23 @@
         </div>
         <div class="movie-detail">
           <div class="detail">
-            <h4>Type</h4>
-            <p>TV Show</p>
-          </div>
-          <div class="detail">
-            <h4>Status</h4>
-            <p>Returning Series</p>
-          </div>
-          <div class="detail">
-            <h4>No. of episodes</h4>
-            <p>20</p>
-          </div>
-          <div class="detail">
             <h4>First air date</h4>
-            <p>2018-04-13</p>
-          </div>
-          <div class="detail">
-            <h4>Last air date</h4>
-            <p>2019-04-24</p>
+            <p id="dateMovie">2018-04-13</p>
           </div>
           <div class="detail">
             <h4>Episode run time</h4>
-            <p>56 min</p>
+            <p id="runTime">56 min</p>
           </div>
           <div class="detail">
             <h4>Genres</h4>
-            <p style="width: 440px">
+            <p id="genres">
               Action & Adventure, Sci-Fi & Fantasy, Drama
             </p>
           </div>
 
           <div class="top-cast-area">
             <h1>top cast</h1>
-            <div class="actors-area">
-              <div class="actors-card">
-                <img src="../assets/images/actors-img.svg" alt="" />
-                <p>maxwell jenkins</p>
-                <p>tony slack</p>
-              </div>
-              <div class="actors-card">
-                <img src="../assets/images/actors-img.svg" alt="" />
-                <p>maxwell jenkins</p>
-                <p>tony slack</p>
-              </div>
-              <div class="actors-card">
-                <img src="../assets/images/actors-img.svg" alt="" />
-                <p>maxwell jenkins</p>
-                <p>tony slack</p>
-              </div>
-              <div class="actors-card">
-                <img src="../assets/images/actors-img.svg" alt="" />
-                <p>maxwell jenkins</p>
-                <p>tony slack</p>
-              </div>
-            </div>
+            <div id="actorsArea" class="actors-area"></div>
           </div>
         </div>
       </div>
@@ -234,5 +201,6 @@
         </div>
       </div>
     </div>
+    <script src="../js/details.js"></script>
   </body>
 </html>
