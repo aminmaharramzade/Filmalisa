@@ -108,8 +108,7 @@ function showModal(message) {
   }, 1000);
 }
 
-
-async function fetchMovies(endpoint){
+async function fetchMovies(endpoint) {
   try {
     const response = await fetch(`${baseURL}/admin/${endpoint}`, {
       method: "GET",
@@ -174,8 +173,7 @@ async function fetchMovies(endpoint){
         <h1>${movie.title}</h1>
       </div>
     `;
-        comedyCardArea.appendChild(card);
-
+      comedyCardArea.appendChild(card);
     });
   } catch (error) {
     console.error("Error:", error);
