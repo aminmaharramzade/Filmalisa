@@ -127,6 +127,11 @@ body {
   cursor: pointer;
 }
 
+.search-card:hover{
+  transform: scale(1.03);
+  transition: 1s;
+ }
+
 .gradient-overlay {
   position: absolute;
   top: 0;
