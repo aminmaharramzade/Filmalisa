@@ -10,7 +10,7 @@ function showNotification(type, message) {
 
 
     positionClass: "toast-top-right",
-    timeOut: 3000, // Bildirişin ekranda qalma müddəti (ms ilə)
+    timeOut: 3000, 
   };
 
   if (type === "success") {
@@ -53,6 +53,7 @@ async function fetchData(endpoint) {
 
 function addCategoryToTable(category) {
   const row = document.createElement('tr');
+  row.setAttribute('data-id', category.id); // `data-id` atributunu əlavə etdik
   row.innerHTML = `
     <th scope="row">${category.id}</th>
     <td>${category.name}</td>
@@ -67,6 +68,7 @@ function addCategoryToTable(category) {
   `;
   categoryTableBody.appendChild(row);
 
+
   row.querySelector('.delete-btn').addEventListener('click', () => {
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
     deleteModal.show();
@@ -74,6 +76,17 @@ function addCategoryToTable(category) {
     document.getElementById('confirmDeleteBtn').onclick = () => {
       deleteCategory(category.id);
       deleteModal.hide();
+    };
+  });
+
+  row.querySelector('.edit-btn').addEventListener('click', () => {
+    document.getElementById('editCategoryName').value = category.name; 
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+
+    document.getElementById('confirmEditBtn').onclick = () => {
+      editCategory(category.id); 
+      editModal.hide();
     };
   });
 }
@@ -114,6 +127,38 @@ document.querySelector('.movies-form').addEventListener('submit', async (event) 
   const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
   modal.hide();
 });
+// PUT
+async function editCategory(categoryId) {
+  const categoryName = document.getElementById('editCategoryName').value.trim();
+
+  if (!categoryName) {
+    showNotification("error", "Please enter a category name.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/category/${categoryId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: categoryName }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    showNotification("success", "Category updated successfully!");
+
+    // Cədvəl sırasını yeniləyirik
+    const row = document.querySelector(`tr[data-id="${categoryId}"]`);
+    row.querySelector('td').textContent = categoryName; // Sıradakı adı dəyişirik
+  } catch (error) {
+    showNotification("error", "Request Error: " + error.message);
+  }
+}
 
 // DELETE
 async function deleteCategory(categoryId) {
