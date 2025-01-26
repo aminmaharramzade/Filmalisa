@@ -17,6 +17,11 @@ async function fetchMovieDetails(id) {
 
     const data = await response.json();
     console.log(data);
+
+    const playBtn = document.querySelector(".play-icon");
+    playBtn.addEventListener("click", function () {
+      showPlayModal(data.data);
+    });
     const movieDetails = document.querySelector(".movie-image img");
     movieDetails.src = data.data.cover_url;
     const overview = document.querySelector(".under-watch p");
@@ -106,6 +111,29 @@ function showModal(message) {
   setTimeout(() => {
     modal.remove();
   }, 1000);
+}
+
+function showPlayModal(movie) { 
+  const modal = document.createElement("div");
+  
+  modal.classList.add("play-modal");
+  modal.innerHTML = `
+    <div class="play-modal-content" style="background-image: url(${movie.cover_url});">
+      <div class="play-modal-overlay"></div>
+      <div class="play-modal-details">
+        <h1>${movie.title}</h1>
+        <div class="play-btn-area">
+        <img src="../assets/icons/play-black-icon.svg" alt="play icon"/>
+        <a href="${movie.watch_url}" class="play-button">Play</a>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.addEventListener("click", () => {
+    modal.remove();
+  });
 }
 
 async function fetchMovies(endpoint) {
