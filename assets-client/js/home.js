@@ -32,7 +32,10 @@ const updateBackgroundImage = (index) => {
     }
   }
   bgSlider.style.backgroundImage = `linear-gradient(to left, #1d1d1d00, #1d1d1dcc), url(${movie.cover_url})`;
-  const movieOverview = movie.overview.length > 200 ? movie.overview.slice(0, 200) + "..." : movie.overview;
+  const movieOverview =
+    movie.overview.length > 200
+      ? movie.overview.slice(0, 200) + "..."
+      : movie.overview;
   headerTextArea.innerHTML = `
     <h4>${movie.category.name}</h4>
     <ul>
@@ -104,12 +107,37 @@ async function fetchData(endpoint) {
     comedyCardArea.innerHTML = "";
 
     data.data.forEach((movie) => {
+      const rating = Math.round(movie.imdb);
+      let starIcon = "";
+      let filledStars = 0;
+
+      if (rating >= 1 && rating <= 3) {
+        filledStars = 2;
+      } else if (rating >= 4 && rating <= 5) {
+        filledStars = 3;
+      } else if (rating >= 6 && rating <= 7) {
+        filledStars = 4;
+      } else if (rating >= 8 && rating <= 10) {
+        filledStars = 5;
+      }
+
+      for (let i = 0; i < 5; i++) {
+        if (i < filledStars) {
+          starIcon +=
+            '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
+        }
+      }
       const card = document.createElement("div");
       card.classList.add("action-card");
       card.innerHTML = `
         <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <div class="action-card-text">
+        <div class=bg-category>
         <h4>${movie.category.name}</h4>
+        </div>
+        <ul>${starIcon}</ul>
         <h1>${movie.title}</h1>
+        </div>
       `;
       if (movie.category.name === "Action") {
         comedyCardArea.appendChild(card);
@@ -122,12 +150,37 @@ async function fetchData(endpoint) {
     });
 
     data.data.forEach((movie) => {
+      const rating = Math.round(movie.imdb);
+      let starIcon = "";
+      let filledStars = 0;
+
+      if (rating >= 1 && rating <= 3) {
+        filledStars = 2;
+      } else if (rating >= 4 && rating <= 5) {
+        filledStars = 3;
+      } else if (rating >= 6 && rating <= 7) {
+        filledStars = 4;
+      } else if (rating >= 8 && rating <= 10) {
+        filledStars = 5;
+      }
+
+      for (let i = 0; i < 5; i++) {
+        if (i < filledStars) {
+          starIcon +=
+            '<li><img src="../assets/icons/star-raiting.svg" alt="filled star" /></li>';
+        }
+      }
       const card = document.createElement("div");
       card.classList.add("comedy-card");
       card.innerHTML = `
         <img src="${movie.cover_url}" alt="${movie.title}" class="background-image" />
+        <div class="comedy-card-text">
+        <div class=bg-category>
         <h4>${movie.category.name}</h4>
+        </div>
+        <ul>${starIcon}</ul>
         <h1>${movie.title}</h1>
+        </div>
       `;
       if (movie.category.name === "Comedy") {
         actionCardArea.appendChild(card);
