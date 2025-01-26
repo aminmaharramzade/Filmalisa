@@ -154,9 +154,15 @@ body {
   position: relative;
 }
 
-.search-card h1 {
+.search-card-text {
   position: absolute;
   bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-card h1 {
   font-family: var(--robotoFont);
   font-weight: 500;
   font-size: 24px;
@@ -166,8 +172,6 @@ body {
 }
 
 .search-card ul {
-  position: absolute;
-  bottom: 72px;
   font-family: var(--robotoFont);
   font-weight: 500;
   font-size: 24px;
@@ -178,8 +182,6 @@ body {
 }
 
 .search-card h4 {
-  position: absolute;
-  bottom: 108px;
   background-color: #1d1d1d80;
   padding: 4px 8px 4px 8px;
   border-top-right-radius: 8px;
@@ -189,6 +191,6 @@ body {
   font-size: 14px;
   line-height: 16px;
   color: #0feffd;
-  text-align: center;
   margin-left: 24px;
+  margin-right: auto;
 }

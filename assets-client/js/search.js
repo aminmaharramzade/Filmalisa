@@ -58,11 +58,13 @@ async function fetchData(endpoint) {
             alt="${movie.title}"
             class="background-image"
           />
+          <div class="search-card-text">
           <h4>${movie.category.name}</h4>
           <ul>
             ${starIcon}
           </ul>
           <h1>${movie.title}</h1>
+          </div>
         `;
 
         searchCardArea.appendChild(card);
