@@ -38,7 +38,7 @@ function addMovieToTable(movie) {
   row.innerHTML = `
     <th scope="row">${movie.id}</th>
     <td>${movie.title}</td>
-    <td>${movie.overview}</td>
+    <td>${movie.overview.slice(0,30)}</td>
     <td>${movie.category}</td>
     <td>${movie.imdb}</td>
     <td>
