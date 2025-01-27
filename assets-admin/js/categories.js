@@ -1,14 +1,15 @@
 const categoryTableBody = document.querySelector('.movie-table tbody');
 const submitButton = document.querySelector('.custom-btn');
 const modal = document.querySelector('#exampleModal');
+const pagination = document.querySelector('.pagination');
+let currentPage = 1;
+const rowsPerPage = 10;
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NzkyNzgzLCJleHAiOjE3Njg4OTY3ODN9.xd6XkHnR3hiWw8rlX-YBuQjzLxTYtoVmeS4zkl04rfc";
 
 function showNotification(type, message) {
   toastr.options = {
-
-
     positionClass: "toast-top-right",
     timeOut: 3000, 
   };
@@ -23,7 +24,6 @@ function showNotification(type, message) {
     toastr.warning(message);
   }
 }
-
 
 // GET 
 async function fetchData(endpoint) {
@@ -42,18 +42,64 @@ async function fetchData(endpoint) {
 
     const data = await response.json();
     console.log(data.data);
-    const sortData = data.data.sort((a, b) => a.id - b.id);
-    sortData.forEach(item => {
-      addCategoryToTable(item);
-    });
+    displayCategories(data.data, categoryTableBody, rowsPerPage, currentPage);
+    setupPagination(data.data, pagination, rowsPerPage);
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
+function displayCategories(categories, wrapper, rowsPerPage, page) {
+  wrapper.innerHTML = "";
+  page--;
+
+  const start = rowsPerPage * page;
+  const end = start + rowsPerPage;
+  const paginatedCategories = categories.slice(start, end);
+
+  paginatedCategories.forEach(category => {
+    addCategoryToTable(category);
+  });
+}
+
+function setupPagination(items, wrapper, rowsPerPage) {
+  wrapper.innerHTML = "";
+
+  const pageCount = Math.ceil(items.length / rowsPerPage);
+  for (let i = 1; i < pageCount + 1; i++) {
+    const btn = paginationButton(i, items);
+    wrapper.appendChild(btn);
+  }
+}
+
+function paginationButton(page, items) {
+  const button = document.createElement('button');
+  button.innerText = page;
+  button.style.backgroundColor = "#58209d";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.margin = "0 5px";
+  button.style.padding = "5px 10px";
+  button.style.borderRadius = "5px";
+
+  if (currentPage == page) button.classList.add('active');
+
+  button.addEventListener('click', function () {
+    currentPage = page;
+    displayCategories(items, categoryTableBody, rowsPerPage, currentPage);
+
+    const currentBtn = document.querySelector('.pagination button.active');
+    if (currentBtn) currentBtn.classList.remove('active');
+
+    button.classList.add('active');
+  });
+
+  return button;
+}
+
 function addCategoryToTable(category) {
   const row = document.createElement('tr');
-  row.setAttribute('data-id', category.id); // `data-id` atributunu əlavə etdik
+  row.setAttribute('data-id', category.id);
   row.innerHTML = `
     <th scope="row">${category.id}</th>
     <td>${category.name}</td>
@@ -67,7 +113,6 @@ function addCategoryToTable(category) {
     </td>
   `;
   categoryTableBody.appendChild(row);
-
 
   row.querySelector('.delete-btn').addEventListener('click', () => {
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
@@ -90,6 +135,7 @@ function addCategoryToTable(category) {
     };
   });
 }
+
 // POST 
 document.querySelector('.movies-form').addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -122,11 +168,11 @@ document.querySelector('.movies-form').addEventListener('submit', async (event) 
     showNotification("error", error.message);
   }
 
-
   document.getElementById('title').value = '';
   const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
   modal.hide();
 });
+
 // PUT
 async function editCategory(categoryId) {
   const categoryName = document.getElementById('editCategoryName').value.trim();
@@ -152,9 +198,8 @@ async function editCategory(categoryId) {
 
     showNotification("success", "Category updated successfully!");
 
-    // Cədvəl sırasını yeniləyirik
     const row = document.querySelector(`tr[data-id="${categoryId}"]`);
-    row.querySelector('td').textContent = categoryName; // Sıradakı adı dəyişirik
+    row.querySelector('td').textContent = categoryName;
   } catch (error) {
     showNotification("error", "Request Error: " + error.message);
   }
@@ -182,4 +227,4 @@ async function deleteCategory(categoryId) {
   }
 }
 
-fetchData('categories'); 
+fetchData('categories');
