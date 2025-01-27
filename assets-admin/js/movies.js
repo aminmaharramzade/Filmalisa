@@ -4,7 +4,7 @@ const submitButton = document.querySelector('.submit button');
 const modal = document.querySelector('#exampleModal');
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
-const token = localStorage.getItem('accessToken');
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3OTg4OTIzLCJleHAiOjE3NjkwOTI5MjN9.9Hztt689ECGP3QyArKno3NNKfX2Uu8HlFe1s132RzCc";
 let editMode = false;
 let editRow = null;
 
@@ -24,10 +24,9 @@ async function fetchData(endpoint) {
 
     const data = await response.json();
     console.log(data.data);
-    data.data.forEach(item => {
-      const option = document.createElement('option');
-      option.textContent = item.name;
-      category.appendChild(option);
+    const movieData = data.data
+    movieData.forEach(item => {
+      addMovieToTable(item);
     });
   } catch (error) {
     console.error("Error:", error);
@@ -39,7 +38,7 @@ function addMovieToTable(movie) {
   row.innerHTML = `
     <th scope="row">${movie.id}</th>
     <td>${movie.title}</td>
-    <td>${movie.overview}</td>
+    <td>${movie.overview.slice(0,30)}</td>
     <td>${movie.category}</td>
     <td>${movie.imdb}</td>
     <td>
@@ -110,4 +109,4 @@ submitButton.addEventListener('click', function(event) {
   category.selectedIndex = 0;
 });
 
-fetchData('categories');
+fetchData('movies');
