@@ -6,6 +6,38 @@ const passwordInput = document.querySelector(`#passwordInput`);
 const passwordEye = document.querySelector(`#passwordEye`);
 const saveBtn = document.querySelector(`#saveBtn`);
 const message = document.querySelector(`.message`);
+const emailInput = document.querySelector(`#emailInput`);
+
+const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
+const token = localStorage.getItem("accessToken");
+
+// Fetch account data
+async function fetchAccountData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const account = data.data;
+
+    imgInput.setAttribute("placeholder", account.img_url);
+    nameInput.setAttribute("placeholder", account.full_name);
+    emailInput.setAttribute("placeholder", account.email);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+fetchAccountData(`profile`);
 
 // password private
 imgEye.addEventListener("click", function () {
@@ -42,10 +74,5 @@ saveBtn.addEventListener("click", function () {
   }
   if (passwordInput.value == "") {
     passwordInput.setAttribute("placeholder", "Required");
-  } else {
-    message.style.display = "block";
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
   }
 });
