@@ -65,10 +65,83 @@ async function fetchMovieDetails(id) {
   }
 }
 
+async function fetchComments(movieId) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const commentBoxArea = document.querySelector(".comment-box-area");
+    console.log(data);
+
+    commentBoxArea.innerHTML = "";
+
+    data.data.forEach((comment) => {
+      const commentBox = document.createElement("div");
+      commentBox.classList.add("comment-box", "slide-in");
+      const commentTime = new Date(comment.created_at);
+      const hours = String(commentTime.getHours()).padStart(2, '0');
+      const minutes = String(commentTime.getMinutes()).padStart(2, '0');
+      commentBox.innerHTML = `
+        <div class="comment-box-header">
+          <div class="comment-box-title">
+            <img
+              src="../assets/images/account-img.svg"
+              style="width: 35px; height: 35px"
+              alt=""
+            />
+            <h5>${comment.id}</h5>
+          </div>
+          <p>${hours}:${minutes}</p>
+        </div>
+        <p class="comment-box-desc">
+          ${comment.comment}
+        </p>
+      `;
+      commentBoxArea.appendChild(commentBox);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function postComment(movieId, comment) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comment`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    fetchComments(movieId); 
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
 if (movieId) {
   fetchMovieDetails(movieId);
+  fetchComments(movieId);
 }
 
 const favBtn = document.querySelector(".search-plus");
@@ -113,9 +186,9 @@ function showModal(message) {
   }, 1000);
 }
 
-function showPlayModal(movie) { 
+function showPlayModal(movie) {
   const modal = document.createElement("div");
-  
+
   modal.classList.add("play-modal");
   modal.innerHTML = `
     <div class="play-modal-content" style="background-image: url(${movie.cover_url});">
@@ -209,3 +282,16 @@ async function fetchMovies(endpoint) {
 }
 
 fetchMovies("movies");
+
+const commentBody = document.querySelector(`.comment-box-area`);
+
+const commentInput = document.querySelector(".comment-input input");
+const commentButton = document.querySelector(".comment-input button");
+
+commentButton.addEventListener("click", () => {
+  const comment = commentInput.value.trim();
+  if (comment && movieId) {
+    postComment(movieId, comment);
+    commentInput.value = ""; // Clear input after posting
+  }
+});
