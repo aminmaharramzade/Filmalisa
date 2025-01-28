@@ -10,7 +10,6 @@ const accountImg = document.querySelector(`#accountImg`);
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
 const token = localStorage.getItem("accessToken");
 
-// Fetch account data
 async function fetchAccountData(endpoint) {
   try {
     const response = await fetch(`${baseURL}/${endpoint}`, {
@@ -28,10 +27,14 @@ async function fetchAccountData(endpoint) {
     const data = await response.json();
     const account = data.data;
 
-    imgInput.setAttribute("placeholder", account.img_url);
-    nameInput.setAttribute("placeholder", account.full_name);
-    emailInput.setAttribute("placeholder", account.email);
-    accountImg.src = account.img_url;
+    imgInput.setAttribute("placeholder", account.img_url || "No image");
+    nameInput.setAttribute("placeholder", account.full_name || "Full Name");
+    emailInput.setAttribute("placeholder", account.email || "Email");
+    accountImg.src = account.img_url || "default-image-url";
+    imgInput.value = account.img_url || "";
+    nameInput.value = account.full_name || "";
+    emailInput.value = account.email || "";
+    passwordInput.value = "";
   } catch (error) {
     console.error("Error:", error);
   }
@@ -39,7 +42,6 @@ async function fetchAccountData(endpoint) {
 
 fetchAccountData(`profile`);
 
-// password private
 passwordEye.addEventListener("click", function () {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -48,28 +50,21 @@ passwordEye.addEventListener("click", function () {
   }
 });
 
-// required input and save btn
-saveBtn.addEventListener("click", function () {
-  if (imgInput.value == "") {
-    imgInput.setAttribute("placeholder", "Required");
-  }
-  if (nameInput.value == "") {
-    nameInput.setAttribute("placeholder", "Required");
-  }
-  if (passwordInput.value == "") {
-    passwordInput.setAttribute("placeholder", "Required");
-  }
-});
-
 saveBtn.addEventListener("click", async function () {
   const imgUrl = imgInput.value.trim();
   const fullName = nameInput.value.trim();
   const password = passwordInput.value.trim();
+  const email = emailInput.value.trim();
 
-  if (!imgUrl || !fullName || !password) {
-    if (!imgUrl) imgInput.setAttribute("placeholder", "Required");
-    if (!fullName) nameInput.setAttribute("placeholder", "Required");
-    if (!password) passwordInput.setAttribute("placeholder", "Required");
+  const body = {};
+
+  if (fullName) body.full_name = fullName;
+  if (imgUrl) body.img_url = imgUrl || null;
+  if (password) body.password = password;
+  if (email) body.email = email;
+
+  if (!fullName && !imgUrl && !password) {
+    message.textContent = "At least one field must be updated.";
     return;
   }
 
@@ -80,7 +75,7 @@ saveBtn.addEventListener("click", async function () {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ imgUrl, fullName, password }),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -88,17 +83,36 @@ saveBtn.addEventListener("click", async function () {
     }
 
     const data = await response.json();
-    console.log(data);
+
     message.textContent = "Profile updated successfully!";
     localStorage.setItem("fullName", fullName);
 
-    imgInput.setAttribute("placeholder", imgUrl);
+    imgInput.setAttribute("placeholder", imgUrl || "No image");
     nameInput.setAttribute("placeholder", fullName);
-    accountImg.src = imgUrl;
+    passwordInput.setAttribute("placeholder", "********");
 
+    accountImg.src = imgUrl || "default-image-url";
 
+    saveBtn.style.backgroundColor = "green";
+    message.style.display = "block";
+    message.style.color = "#fff";
+    message.style.fontFamily = "var(--numansFont)";
+
+    setTimeout(() => {
+      saveBtn.style.backgroundColor = "";
+      message.style.display = "none";
+    }, 1000);
   } catch (error) {
-    console.error("Error:", error);
-    message.textContent = "Failed to update profile.";
+    message.style.display = "block";
+    message.textContent = error.message;
+    message.style.color = "#fff";
+    message.style.backgroundColor = "red";
+    passwordInput.style.borderColor = "red";
+    message.style.fontFamily = "var(--numansFont)";
+
+    setTimeout(() => {
+      message.style.display = "none";
+      passwordInput.style.borderColor = "";
+    }, 2000);
   }
 });
