@@ -1,12 +1,11 @@
 const imgInput = document.querySelector(`#imgInput`);
-const imgEye = document.querySelector(`#imgEye`);
 const nameInput = document.querySelector(`#nameInput`);
-const nameEye = document.querySelector(`#nameEye`);
 const passwordInput = document.querySelector(`#passwordInput`);
 const passwordEye = document.querySelector(`#passwordEye`);
 const saveBtn = document.querySelector(`#saveBtn`);
 const message = document.querySelector(`.message`);
 const emailInput = document.querySelector(`#emailInput`);
+const accountImg = document.querySelector(`#accountImg`);
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
 const token = localStorage.getItem("accessToken");
@@ -32,6 +31,7 @@ async function fetchAccountData(endpoint) {
     imgInput.setAttribute("placeholder", account.img_url);
     nameInput.setAttribute("placeholder", account.full_name);
     emailInput.setAttribute("placeholder", account.email);
+    accountImg.src = account.img_url;
   } catch (error) {
     console.error("Error:", error);
   }
@@ -40,22 +40,6 @@ async function fetchAccountData(endpoint) {
 fetchAccountData(`profile`);
 
 // password private
-imgEye.addEventListener("click", function () {
-  if (imgInput.type === "text") {
-    imgInput.type = "password";
-  } else {
-    imgInput.type = "text";
-  }
-});
-
-nameEye.addEventListener("click", function () {
-  if (nameInput.type === "text") {
-    nameInput.type = "password";
-  } else {
-    nameInput.type = "text";
-  }
-});
-
 passwordEye.addEventListener("click", function () {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -74,5 +58,47 @@ saveBtn.addEventListener("click", function () {
   }
   if (passwordInput.value == "") {
     passwordInput.setAttribute("placeholder", "Required");
+  }
+});
+
+saveBtn.addEventListener("click", async function () {
+  const imgUrl = imgInput.value.trim();
+  const fullName = nameInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  if (!imgUrl || !fullName || !password) {
+    if (!imgUrl) imgInput.setAttribute("placeholder", "Required");
+    if (!fullName) nameInput.setAttribute("placeholder", "Required");
+    if (!password) passwordInput.setAttribute("placeholder", "Required");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/profile`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ imgUrl, fullName, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    message.textContent = "Profile updated successfully!";
+    localStorage.setItem("fullName", fullName);
+
+    imgInput.setAttribute("placeholder", imgUrl);
+    nameInput.setAttribute("placeholder", fullName);
+    accountImg.src = imgUrl;
+
+
+  } catch (error) {
+    console.error("Error:", error);
+    message.textContent = "Failed to update profile.";
   }
 });
