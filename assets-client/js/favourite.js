@@ -1,5 +1,5 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/movies";
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
+const token = localStorage.getItem("accessToken");
 
 async function fetchFavourites(endpoint) {
   try {
