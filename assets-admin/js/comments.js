@@ -1,6 +1,6 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3OTI5NzcwLCJleHAiOjE3NjkwMzM3NzB9.J9Ytl3YcI3HhEGNVWep4iStTkMBYkd_jbHC3U1gSjmo";
-const usersTableBody = document.querySelector(`.movie-table tbody`);
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NzkyNzgzLCJleHAiOjE3Njg4OTY3ODN9.xd6XkHnR3hiWw8rlX-YBuQjzLxTYtoVmeS4zkl04rfc";
+const commentTableBody = document.querySelector(`.movie-table tbody`);
 const pagination = document.querySelector('.pagination');
 let currentPage = 1;
 const rowsPerPage = 10;
@@ -22,23 +22,23 @@ async function fetchData(endpoint) {
 
     const data = await response.json();
     console.log(data.data);
-    displayUsers(data.data, usersTableBody, rowsPerPage, currentPage);
+    displayComments(data.data, commentTableBody, rowsPerPage, currentPage);
     setupPagination(data.data, pagination, rowsPerPage);
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
-function displayUsers(users, wrapper, rowsPerPage, page) {
+function displayComments(comments, wrapper, rowsPerPage, page) {
   wrapper.innerHTML = "";
   page--;
 
   const start = rowsPerPage * page;
   const end = start + rowsPerPage;
-  const paginatedUsers = users.slice(start, end);
+  const paginatedComments = comments.slice(start, end);
 
-  paginatedUsers.forEach(user => {
-    addUsersToTable(user);
+  paginatedComments.forEach(comment => {
+    addCommentsToTable(comment);
   });
 }
 
@@ -66,7 +66,7 @@ function paginationButton(page, items) {
 
   button.addEventListener('click', function () {
     currentPage = page;
-    displayUsers(items, usersTableBody, rowsPerPage, currentPage);
+    displayComments(items, commentTableBody, rowsPerPage, currentPage);
 
     const currentBtn = document.querySelector('.pagination button.active');
     if (currentBtn) currentBtn.classList.remove('active');
@@ -77,15 +77,50 @@ function paginationButton(page, items) {
   return button;
 }
 
-function addUsersToTable(user) {
+function addCommentsToTable(comment) {
   const row = document.createElement("tr");
   row.innerHTML = `
-    <th scope="row">${user.id}</th>
-    <td>${user.full_name}</td>
-    <td>${user.email}</td>
-    <td><img style="width: 30px ; height: 40px;object-fit: cover" src="${user.img_url}"></td>
+    <th scope="row">${comment.id}</th>
+    <td>${comment.comment}</td>
+    <td>${comment.movie.title}</td>
+    <td>
+      <button class="btn btn-danger delete-btn" data-id="${comment.id}" data-movie-id="${comment.movie.id}">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </td>
   `;
-  usersTableBody.appendChild(row);
+  commentTableBody.appendChild(row);
+
+  row.querySelector(".delete-btn").addEventListener("click", async (event) => {
+    const commentId = event.target.closest("button").dataset.id;
+    const movieId = event.target.closest("button").dataset.movieId;
+    await removeComment(movieId, commentId);
+    row.remove();
+  });
 }
 
-fetchData(`users`);
+fetchData(`comments`);
+
+// DELETE
+async function removeComment(movieId, commentId) {
+  try {
+    const response = await fetch(
+      `${baseURL}/movies/${movieId}/comment/${commentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    console.log(`Comment ${commentId} deleted successfully`);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
