@@ -288,7 +288,7 @@ body {
 }
 
 .comment-box {
-  max-width: 683px;
+  min-width: 683px;
   min-height: auto;
   padding: 25px 40px 25px 40px;
   margin-left: 86px;

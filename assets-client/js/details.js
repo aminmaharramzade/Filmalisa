@@ -1,5 +1,5 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
-const token = localStorage.getItem("accessToken");
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
 
 async function fetchMovieDetails(id) {
   try {
@@ -65,10 +65,83 @@ async function fetchMovieDetails(id) {
   }
 }
 
+async function fetchComments(movieId) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const commentBoxArea = document.querySelector(".comment-box-area");
+    console.log(data);
+
+    commentBoxArea.innerHTML = "";
+
+    data.data.forEach((comment) => {
+      const commentBox = document.createElement("div");
+      commentBox.classList.add("comment-box", "slide-in");
+      const commentTime = new Date(comment.created_at);
+      const hours = String(commentTime.getHours()).padStart(2, '0');
+      const minutes = String(commentTime.getMinutes()).padStart(2, '0');
+      commentBox.innerHTML = `
+        <div class="comment-box-header">
+          <div class="comment-box-title">
+            <img
+              src="../assets/images/account-img.svg"
+              style="width: 35px; height: 35px"
+              alt=""
+            />
+            <h5>${comment.id}</h5>
+          </div>
+          <p>${hours}:${minutes}</p>
+        </div>
+        <p class="comment-box-desc">
+          ${comment.comment}
+        </p>
+      `;
+      commentBoxArea.appendChild(commentBox);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function postComment(movieId, comment) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comment`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    fetchComments(movieId); 
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
 if (movieId) {
   fetchMovieDetails(movieId);
+  fetchComments(movieId);
 }
 
 const favBtn = document.querySelector(".search-plus");
@@ -210,27 +283,15 @@ async function fetchMovies(endpoint) {
 
 fetchMovies("movies");
 
-async function fetchAccountData(endpoint) {
-  try {
-    const response = await fetch(`${baseURL}/${endpoint}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+const commentBody = document.querySelector(`.comment-box-area`);
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
+const commentInput = document.querySelector(".comment-input input");
+const commentButton = document.querySelector(".comment-input button");
 
-    const data = await response.json();
-    const account = data.data;
-
-    console.log(data.data);
-  } catch (error) {
-    console.error("Error:", error);
+commentButton.addEventListener("click", () => {
+  const comment = commentInput.value.trim();
+  if (comment && movieId) {
+    postComment(movieId, comment);
+    commentInput.value = ""; // Clear input after posting
   }
-}
-
-fetchAccountData(`profile`);
+});
