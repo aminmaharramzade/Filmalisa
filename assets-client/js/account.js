@@ -86,6 +86,7 @@ saveBtn.addEventListener("click", async function () {
 
     message.textContent = "Profile updated successfully!";
     localStorage.setItem("fullName", fullName);
+    localStorage.setItem("imgUrl", imgUrl);
 
     imgInput.setAttribute("placeholder", imgUrl || "No image");
     nameInput.setAttribute("placeholder", fullName);
