@@ -1,5 +1,5 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
+const token = localStorage.getItem("accessToken");
 
 async function fetchMovieDetails(id) {
   try {
@@ -113,9 +113,9 @@ function showModal(message) {
   }, 1000);
 }
 
-function showPlayModal(movie) { 
+function showPlayModal(movie) {
   const modal = document.createElement("div");
-  
+
   modal.classList.add("play-modal");
   modal.innerHTML = `
     <div class="play-modal-content" style="background-image: url(${movie.cover_url});">
@@ -209,3 +209,28 @@ async function fetchMovies(endpoint) {
 }
 
 fetchMovies("movies");
+
+async function fetchAccountData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const account = data.data;
+
+    console.log(data.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+fetchAccountData(`profile`);

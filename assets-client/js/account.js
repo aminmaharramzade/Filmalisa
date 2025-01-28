@@ -1,12 +1,11 @@
 const imgInput = document.querySelector(`#imgInput`);
-const imgEye = document.querySelector(`#imgEye`);
 const nameInput = document.querySelector(`#nameInput`);
-const nameEye = document.querySelector(`#nameEye`);
 const passwordInput = document.querySelector(`#passwordInput`);
 const passwordEye = document.querySelector(`#passwordEye`);
 const saveBtn = document.querySelector(`#saveBtn`);
 const message = document.querySelector(`.message`);
 const emailInput = document.querySelector(`#emailInput`);
+const accountImg = document.querySelector(`#accountImg`);
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
 const token = localStorage.getItem("accessToken");
@@ -32,6 +31,7 @@ async function fetchAccountData(endpoint) {
     imgInput.setAttribute("placeholder", account.img_url);
     nameInput.setAttribute("placeholder", account.full_name);
     emailInput.setAttribute("placeholder", account.email);
+    accountImg.src = account.img_url;
   } catch (error) {
     console.error("Error:", error);
   }
@@ -40,22 +40,6 @@ async function fetchAccountData(endpoint) {
 fetchAccountData(`profile`);
 
 // password private
-imgEye.addEventListener("click", function () {
-  if (imgInput.type === "text") {
-    imgInput.type = "password";
-  } else {
-    imgInput.type = "text";
-  }
-});
-
-nameEye.addEventListener("click", function () {
-  if (nameInput.type === "text") {
-    nameInput.type = "password";
-  } else {
-    nameInput.type = "text";
-  }
-});
-
 passwordEye.addEventListener("click", function () {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
