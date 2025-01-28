@@ -1,5 +1,5 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
+const token = localStorage.getItem("accessToken");
 
 async function fetchMovieDetails(id) {
   try {
@@ -89,17 +89,17 @@ async function fetchComments(movieId) {
       const commentBox = document.createElement("div");
       commentBox.classList.add("comment-box", "slide-in");
       const commentTime = new Date(comment.created_at);
-      const hours = String(commentTime.getHours()).padStart(2, '0');
-      const minutes = String(commentTime.getMinutes()).padStart(2, '0');
+      const hours = String(commentTime.getHours()).padStart(2, "0");
+      const minutes = String(commentTime.getMinutes()).padStart(2, "0");
       commentBox.innerHTML = `
         <div class="comment-box-header">
           <div class="comment-box-title">
-            <img
-              src="../assets/images/account-img.svg"
+            <img id='userCommentImg'
+            src="../assets/images/logo.svg"
               style="width: 35px; height: 35px"
               alt=""
             />
-            <h5>${comment.id}</h5>
+            <h5>${localStorage.getItem("fullName")}</h5>
           </div>
           <p>${hours}:${minutes}</p>
         </div>
@@ -131,7 +131,7 @@ async function postComment(movieId, comment) {
 
     const data = await response.json();
     console.log(data);
-    fetchComments(movieId); 
+    fetchComments(movieId);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -295,3 +295,35 @@ commentButton.addEventListener("click", () => {
     commentInput.value = ""; // Clear input after posting
   }
 });
+
+async function fetchAccountData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const account = data.data;
+    localStorage.setItem("fullName", `${account.full_name}`);
+    const commentImg = document.querySelector(`#commentImg`);
+    const userCommentImg = document.querySelector(`#userCommentImg`)
+
+    if (!commentImg.src == null && !userCommentImg.src == null) {
+      commentImg.src = account.img_url;
+      userCommentImg.src = account.img_url
+    }
+    console.log(data.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+fetchAccountData(`profile`);
