@@ -2,6 +2,7 @@ const passwordEye = document.querySelector(`#passwordEye`);
 const passwordInput = document.querySelector(`#inputPassword`);
 const nameInput = document.querySelector(`#inputName`);
 const loginBtn = document.querySelector(`#loginBtn`);
+const message = document.querySelector(`.message`);
 
 // Toggle password visibility
 passwordEye.addEventListener("click", function () {
@@ -53,5 +54,14 @@ async function fetchData(endpoint, email, password) {
     }
   } catch (error) {
     console.error("Error:", error);
+    message.style.display = "block";
+    message.textContent = error.message;
+    message.style.color = "#fff";
+    message.style.backgroundColor = "red";
+    message.style.fontFamily = "var(--numansFont)";
+
+    setTimeout(() => {
+      message.style.display = "none";
+    }, 2000);
   }
 }
