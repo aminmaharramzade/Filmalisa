@@ -104,7 +104,7 @@ async function fetchComments(movieId) {
           <div class="comment-box-title">
             <img id='userCommentImg'
             src="${getImgUrl()}"
-            style="width: 35px; height: 35px"
+            style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
               alt=""
             />
             <h5>${localStorage.getItem("fullName")}</h5>
