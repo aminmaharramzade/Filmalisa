@@ -138,3 +138,13 @@ main {
   line-height: 13px;
   color: var(--textColor);
 }
+.admin-acc-head button {
+  margin-right: 28px;
+  background-color: #9b51e0;
+  border-radius: 4px;
+  width: 92px;
+  height: 26px;
+  color: #fff;
+  border: none;
+  font-family: var(--numansFont);
+}
