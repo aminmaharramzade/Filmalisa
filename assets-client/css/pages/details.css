@@ -270,11 +270,13 @@ body {
 .actors-area {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
 }
 
 .actors-card img {
   width: 128px;
   height: 162px;
+  object-fit: cover;
 }
 
 .actors-card p {
