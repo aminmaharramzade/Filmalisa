@@ -41,8 +41,9 @@ async function fetchData(endpoint) {
     }
 
     const data = await response.json();
-    displayActors(data.data, actorTableBody, rowsPerPage, currentPage);
-    setupPagination(data.data, pagination, rowsPerPage);
+    const sortedData = data.data.sort((a, b) => b.id - a.id);
+    displayActors(sortedData, actorTableBody, rowsPerPage, currentPage);
+    setupPagination(sortedData, pagination, rowsPerPage);
   } catch (error) {
     console.error("Error:", error);
   }
