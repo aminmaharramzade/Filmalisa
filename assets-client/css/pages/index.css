@@ -347,7 +347,7 @@
   cursor: pointer;
 }
 
-.contact-area form a:hover {
+.contact-area form p:hover {
   background: none;
   transition: 0.6s;
 }
