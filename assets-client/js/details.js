@@ -205,7 +205,7 @@ function showPlayModal(movie) {
         <h1>${movie.title}</h1>
         <div class="play-btn-area">
         <img src="../assets/icons/play-black-icon.svg" alt="play icon"/>
-        <a href="${movie.watch_url}" class="play-button">Play</a>
+        <a href="${movie.fragman}" class="play-button">Trailer</a>
         </div>
       </div>
     </div>
