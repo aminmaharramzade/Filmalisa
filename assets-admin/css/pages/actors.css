@@ -148,3 +148,14 @@ main {
   border: none;
   font-family: var(--numansFont);
 }
+.movie-table {
+  margin-top: 56px;
+}
+
+.modal-content {
+  background-color: #171616;
+  border-radius: 24px;
+}
+.input-area {
+ padding: 20px !important;
+}
