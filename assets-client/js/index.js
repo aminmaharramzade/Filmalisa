@@ -67,3 +67,7 @@ submitBtn.addEventListener("click", (event) => {
   emailInput.value = "";
   reasonInput.value = "";
 });
+
+if(localStorage.getItem("accessToken")){
+  document.querySelector(`.header-btn`).style.display = "none";
+}
