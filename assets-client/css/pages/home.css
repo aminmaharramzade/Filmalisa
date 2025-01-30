@@ -165,6 +165,11 @@ body {
   cursor: pointer;
 }
 
+.action-card:hover {
+  transform: scale(1.03);
+  transition: 0.6s;
+}
+
 .action-card-text {
   position: absolute;
   bottom: 24px;
@@ -239,6 +244,11 @@ body {
   padding-left: 24px;
   background-image: linear-gradient(to bottom, #1d1d1d00, #1d1d1dcc);
   cursor: pointer;
+}
+
+.comedy-card:hover {
+  transform: scale(1.03);
+  transition: 0.6s;
 }
 
 .comedy-card-text {

@@ -30,7 +30,7 @@ async function fetchAccountData(endpoint) {
     imgInput.setAttribute("placeholder", account.img_url || "No image");
     nameInput.setAttribute("placeholder", account.full_name || "Full Name");
     emailInput.setAttribute("placeholder", account.email || "Email");
-    accountImg.src = account.img_url || "default-image-url";
+    accountImg.src = account.img_url;
     imgInput.value = account.img_url || "";
     nameInput.value = account.full_name || "";
     emailInput.value = account.email || "";
@@ -64,7 +64,6 @@ saveBtn.addEventListener("click", async function () {
   if (email) body.email = email;
 
   if (!fullName && !imgUrl && !password) {
-    message.textContent = "At least one field must be updated.";
     return;
   }
 
@@ -86,6 +85,7 @@ saveBtn.addEventListener("click", async function () {
 
     message.textContent = "Profile updated successfully!";
     localStorage.setItem("fullName", fullName);
+    localStorage.setItem("imgUrl", imgUrl);
 
     imgInput.setAttribute("placeholder", imgUrl || "No image");
     nameInput.setAttribute("placeholder", fullName);

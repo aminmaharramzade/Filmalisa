@@ -86,6 +86,14 @@ async function fetchComments(movieId) {
     commentBoxArea.innerHTML = "";
 
     data.data.forEach((comment) => {
+      function getImgUrl() {
+        if (localStorage.getItem("imgUrl") == "null") {
+          return "../assets/images/logo.svg";
+        } else {
+          return `${localStorage.getItem("imgUrl")}`;
+        }
+      }
+
       const commentBox = document.createElement("div");
       commentBox.classList.add("comment-box", "slide-in");
       const commentTime = new Date(comment.created_at);
@@ -95,8 +103,8 @@ async function fetchComments(movieId) {
         <div class="comment-box-header">
           <div class="comment-box-title">
             <img id='userCommentImg'
-            src="../assets/images/logo.svg"
-              style="width: 35px; height: 35px"
+            src="${getImgUrl()}"
+            style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
               alt=""
             />
             <h5>${localStorage.getItem("fullName")}</h5>
@@ -312,14 +320,12 @@ async function fetchAccountData(endpoint) {
 
     const data = await response.json();
     const account = data.data;
-    localStorage.setItem("fullName", `${account.full_name}`);
-    const commentImg = document.querySelector(`#commentImg`);
-    const userCommentImg = document.querySelector(`#userCommentImg`)
 
-    if (!commentImg.src == null && !userCommentImg.src == null) {
-      commentImg.src = account.img_url;
-      userCommentImg.src = account.img_url
+    if (account.img_url == null) {
+      localStorage.setItem("imgUrl", `${account.img_url}`);
+      const userCommentImg = document.querySelector(`#userCommentImg`);
     }
+
     console.log(data.data);
   } catch (error) {
     console.error("Error:", error);
