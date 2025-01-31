@@ -13,7 +13,7 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWlu
 function showNotification(type, message) {
   toastr.options = {
     positionClass: "toast-top-right",
-    timeOut: 3000, 
+    timeOut: 3000,
   };
 
   if (type === "success") {
@@ -52,6 +52,36 @@ async function fetchData(endpoint) {
     console.error("Error:", error);
   }
 }
+async function fetchActors() {
+  try {
+    const response = await fetch(`${baseURL}/actors`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const actorSelect = document.getElementById("actor");
+
+
+    actorSelect.innerHTML = '<option selected disabled>Choose actor</option>';
+
+    data.data.forEach(actor => {
+      const option = document.createElement("option");
+      option.value = actor.id;
+      option.textContent = actor.name;
+      actorSelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 async function fetchCategories(endpoint) {
   try {
     const response = await fetch(`${baseURL}/${endpoint}`, {
@@ -68,7 +98,7 @@ async function fetchCategories(endpoint) {
 
     const data = await response.json();
     category.innerHTML = '<option selected disabled>Choose category</option>';
-    
+
     data.data.forEach(cat => {
       const option = document.createElement("option");
       option.value = cat.id;
@@ -79,11 +109,16 @@ async function fetchCategories(endpoint) {
     console.error("Error:", error);
   }
 
-  
+
 }
 // POST Movies
 document.querySelector(".movies-form").addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const categorySelect = document.getElementById("category");
+  const actorSelect = document.getElementById("actor");
+
+  
 
   const movieTitle = document.getElementById("title").value.trim();
   const overview = document.getElementById("overview").value.trim();
@@ -91,14 +126,24 @@ document.querySelector(".movies-form").addEventListener("submit", async (event) 
   const trailerUrl = document.getElementById("trailerUrl").value.trim();
   const watchUrl = document.getElementById("watchUrl").value.trim();
   const imdb = document.getElementById("imdb").value.trim();
+  const categoryIds = Array.from(categorySelect.selectedOptions).map(option => Number(option.value));
+  const actorIds = Array.from(actorSelect.selectedOptions).map(option => Number(option.value));
   const runtime = document.getElementById("runtime").value.trim();
-  const categoryId = document.getElementById("category").value;
   const adult = document.getElementById("adult").checked;
 
-  // if (!movieTitle || !overview || !coverUrl || !trailerUrl || !watchUrl || !imdb || !runtime || !categoryId) {
-  //   showNotification("error", "Please fill in all required fields!");
-  //   return;
-  // }
+  const movieData = {
+    title: movieTitle,
+    overview: overview,
+    cover_url: coverUrl,
+    fragman: trailerUrl,
+    watch_url: watchUrl,
+    adult: adult,
+    run_time_min: Number(runtime),
+    imdb: Number(imdb),
+    category: categoryIds,
+    actors: [actorIds],
+  };
+
 
   try {
     const response = await fetch(`${baseURL}/movie`, {
@@ -107,30 +152,23 @@ document.querySelector(".movies-form").addEventListener("submit", async (event) 
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: movieTitle,
-        overview: overview,
-        coverUrl: coverUrl,
-        trailerUrl: trailerUrl,
-        watchUrl: watchUrl,
-        imdb: imdb,
-        runtime: Number(runtime), 
-        adult: adult, // Buraya əlavə etdik
-      }),
-      
+      body: JSON.stringify(movieData),
     });
+    console.log("Cavab Məlumatı:", await response.text());
+
 
     if (response.ok) {
       const data = await response.json();
-      displayMovies(data.data, movieTableBody, rowsPerPage, currentPage);
-      setupPagination(data.data, pagination, rowsPerPage);
+      addMovieToTable(data.data);
       showNotification("success", "Movie successfully added!");
-      
-      // Formu təmizlə
+
+
       document.querySelector(".movies-form").reset();
 
       const modal = bootstrap.Modal.getInstance(document.getElementById("exampleModal"));
       modal.hide();
+
+      fetchData('movies');
     } else {
       showNotification("error", "Error: " + response.status);
     }
@@ -195,7 +233,7 @@ function addMovieToTable(movie) {
   row.innerHTML = `
     <th scope="row">${movie.id}</th>
     <td>${movie.title}</td>
-    <td>${movie.overview.slice(0,30)}</td>
+    <td>${movie.overview.slice(0, 30)}</td>
     <td>${movie.category.name}</td>
     <td>${movie.imdb}</td>
     <td>
@@ -211,6 +249,7 @@ function addMovieToTable(movie) {
 }
 
 (async function init() {
-  await fetchCategories('categories'); 
-  fetchData('movies'); 
+  await fetchCategories('categories'); // Fetch categories
+  await fetchActors(); // Fetch actors
+  fetchData('movies'); // Fetch movies or other data
 })();

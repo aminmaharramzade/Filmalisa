@@ -111,13 +111,7 @@
         </table>
         <div style="display: flex; justify-content: center; margin-top: 10px;" class="pagination"></div>
 
-        <div
-          class="modal fade text-light"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
+        <div class="modal fade text-light" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-body">
@@ -125,108 +119,61 @@
                   <div class="col-lg-8">
                     <form class="movies-form">
                       <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="title"
-                          placeholder="Enter movie title"
-                        />
+                        <input type="text" class="form-control" id="title" placeholder="Enter movie title" />
                       </div>
-
+        
                       <div class="mb-3">
-                        <textarea
-                          class="form-control"
-                          id="overview"
-                          rows="3"
-                          placeholder="Enter movie overview"
-                        ></textarea>
+                        <textarea class="form-control" id="overview" rows="3" placeholder="Enter movie overview"></textarea>
                       </div>
-
+        
                       <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="coverUrl"
-                          placeholder="Enter cover URL"
-                        />
+                        <input type="text" class="form-control" id="coverUrl" placeholder="Enter cover URL" />
                       </div>
-
+        
                       <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="trailerUrl"
-                          placeholder="Enter trailer URL"
-                        />
+                        <input type="text" class="form-control" id="trailerUrl" placeholder="Enter trailer URL" />
                       </div>
-
+        
                       <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="watchUrl"
-                          placeholder="Enter watch URL"
-                        />
+                        <input type="text" class="form-control" id="watchUrl" placeholder="Enter watch URL" />
                       </div>
-
+        
                       <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="imdb"
-                          placeholder="Enter IMDb rating"
-                        />
+                        <input type="text" class="form-control" id="imdb" placeholder="Enter IMDb rating" />
                       </div>
-
+        
                       <div class="mb-3">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="runtime"
-                          placeholder="Enter runtime in minutes"
-                        />
+                        <input type="number" class="form-control" id="runtime" placeholder="Enter runtime in minutes" />
                       </div>
-
+        
                       <div class="mb-3">
                         <select class="form-select" id="category">
                           <option selected disabled>Choose category</option>
-                          <!-- <option value="action">Action</option>
-                         
-                          <option value="comedy">Comedy</option> -->
+                          <!-- Category options will be dynamically added here -->
                         </select>
                       </div>
-
-                      <div
-                        class="form-check d-flex justify-content-between align-items-center"
-                      >
+        
+                      <div class="mb-3">
+                        <select class="form-select" id="actor">
+                          <option selected disabled>Choose actor</option>
+                          <!-- Actor options will be dynamically added here -->
+                        </select>
+                      </div>
+        
+                      <div class="form-check d-flex justify-content-between align-items-center">
                         <div>
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="adult"
-                          />
-                          <label class="form-check-label m-1" for="adult"
-                            >Adult</label
-                          >
+                          <input class="form-check-input" type="checkbox" id="adult" />
+                          <label class="form-check-label m-1" for="adult">Adult</label>
                         </div>
                         <div class="flex-end submit">
-                          <button type="submit" class="btn text-light">
-                            Submit
-                          </button>
+                          <button type="submit" class="btn text-light">Submit</button>
                         </div>
                       </div>
                     </form>
                   </div>
-
+        
                   <div class="col-lg-4 text-center">
-                    <img
-                      id="coverPreview"
-                      src="../../assets-client/assets/images/movie-detail-img.svg"
-                      alt="Cover Preview"
-                      class="img-fluid rounded"
-                      style="height: 283px"
-                      width="203px"
-                    />
+                    <img id="coverPreview" src="../../assets-client/assets/images/movie-detail-img.svg" alt="Cover Preview" class="img-fluid rounded" style="height: 283px" width="203px" />
                   </div>
                 </div>
               </div>
