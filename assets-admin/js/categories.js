@@ -177,10 +177,7 @@ document.querySelector('.movies-form').addEventListener('submit', async (event) 
 async function editCategory(categoryId) {
   const categoryName = document.getElementById('editCategoryName').value.trim();
 
-  if (!categoryName) {
-    showNotification("error", "Please enter a category name.");
-    return;
-  }
+
 
   try {
     const response = await fetch(`${baseURL}/category/${categoryId}`, {

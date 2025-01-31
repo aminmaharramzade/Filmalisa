@@ -115,22 +115,6 @@ async function fetchCategories(endpoint) {
 document.querySelector(".movies-form").addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const categorySelect = document.getElementById("category");
-  const actorSelect = document.getElementById("actor");
-
-  
-
-  // const movieTitle = document.getElementById("title").value.trim();
-  // const overview = document.getElementById("overview").value.trim();
-  // const coverUrl = document.getElementById("coverUrl").value.trim();
-  // const trailerUrl = document.getElementById("trailerUrl").value.trim();
-  // const watchUrl = document.getElementById("watchUrl").value.trim();
-  // const imdb = document.getElementById("imdb").value.trim();
-  // const categoryIds = Array.from(categorySelect.selectedOptions).map(option => Number(option.value));
-  // const actorIds = Array.from(actorSelect.selectedOptions).map(option => Number(option.value));
-  // const runtime = document.getElementById("runtime").value.trim();
-  // const adult = document.getElementById("adult").checked;
-
   const movieData = {
     title: document.getElementById("title").value,
     cover_url: document.getElementById("coverUrl").value,
@@ -176,7 +160,76 @@ document.querySelector(".movies-form").addEventListener("submit", async (event) 
   }
 });
 
+// PUT Movies and 
+// PUT Movies - Updating an existing movie
+async function editMovie(movieId, movieData) {
+  document.getElementById('editTitle').value = movieData.title;
+  document.getElementById('editOverview').value = movieData.overview;
+  document.getElementById('editCoverUrl').value = movieData.coverUrl;
+  document.getElementById('editTrailerUrl').value = movieData.trailerUrl;
+  document.getElementById('editWatchUrl').value = movieData.watchUrl;
+  document.getElementById('editImdb').value = movieData.imdb;
+  document.getElementById('editRuntime').value = movieData.runtime;
+  document.getElementById('editCategory').value = movieData.category;
+  document.getElementById('editActor').value = movieData.actor;
+  document.getElementById('editAdult').checked = movieData.adult;
 
+
+
+  try {
+    const response = await fetch(`${baseURL}/movie/${movieId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(movieData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    showNotification("success", "Movie updated successfully!");
+
+    const row = document.querySelector(`tr[data-id="${movieId}"]`);
+    row.querySelector('td').textContent = movieData.title;
+  } catch (error) {
+    showNotification("error", "Request Error: " + error.message);
+  }
+}
+
+
+
+async function sendUpdateRequest(movieId, updatedMovieData) {
+  try {
+    const response = await fetch(`${baseURL}/movie/${movieId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedMovieData),
+    });
+
+    if (response.ok) {
+      await response.json();
+      showNotification("success", "Movie successfully updated!");
+
+      const modal = bootstrap.Modal.getInstance(document.getElementById('editMovieModal'));
+      modal.hide();
+
+      fetchData('movies');
+    } else {
+      const errorData = await response.json();
+      showNotification("error", `Error: ${errorData.message || response.status}`);
+    }
+  } catch (error) {
+    showNotification("error", `Error: ${error.message}`);
+  }
+}
+
+// document.querySelector(".edit-movie-form").addEventListener("submit", updateMovie(movieId));
 
 
 function displayMovies(movies, wrapper, rowsPerPage, page) {
@@ -229,11 +282,11 @@ function paginationButton(page, items) {
 
 function addMovieToTable(movie) {
   const row = document.createElement('tr');
+  row.setAttribute('data-id', movie.id);
   row.innerHTML = `
     <th scope="row">${movie.id}</th>
-
-    <td>${movie.title} </td>
-    <td>${movie.overview.slice(0,30)}</td>
+    <td>${movie.title}</td>
+    <td>${movie.overview.slice(0, 30)}</td>
     <td>${movie.category.name}</td>
     <td>${movie.imdb}</td>
     <td>
@@ -246,6 +299,71 @@ function addMovieToTable(movie) {
     </td>
   `;
   movieTableBody.appendChild(row);
+
+  row.querySelector('.delete-btn').addEventListener('click', () => {
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+    deleteModal.show();
+
+    document.getElementById('confirmDeleteBtn').onclick = () => {
+      deleteMovie(movie.id);
+      deleteModal.hide();
+    };
+  });
+
+  row.querySelector('.edit-btn').addEventListener('click', () => {
+    document.getElementById('editTitle').value = movie.title;
+    document.getElementById('editOverview').value = movie.overview;
+    document.getElementById('editCoverUrl').value = movie.cover_url;
+    document.getElementById('editTrailerUrl').value = movie.fragman;
+    document.getElementById('editWatchUrl').value = movie.watch_url;
+    document.getElementById('editImdb').value = movie.imdb;
+    document.getElementById('editRuntime').value = movie.run_time_min;
+    document.getElementById('editCategory').value = movie.category.name;
+    document.getElementById('editActor').value = movie.actor;
+    document.getElementById('editAdult').checked = movie.adult;
+
+    const editModal = new bootstrap.Modal(document.getElementById('editMovieModal'));
+    editModal.show();
+
+    document.getElementById('saveEditMovieBtn').onclick = () => {
+      const updatedMovieData = {
+        title: document.getElementById('editTitle').value,
+        overview: document.getElementById('editOverview').value,
+        cover_url: document.getElementById('editCoverUrl').value,
+        fragman: document.getElementById('editTrailerUrl').value,
+        watch_url: document.getElementById('editWatchUrl').value,
+        imdb: document.getElementById('editImdb').value,
+        run_time_min: parseInt(document.getElementById('editRuntime').value),
+        category: parseInt(document.getElementById('editCategory').value),
+        actors: [...document.getElementById('editActor').selectedOptions].map(opt => parseInt(opt.value)),
+        adult: document.getElementById('editAdult').checked
+      };
+      sendUpdateRequest(movie.id, updatedMovieData);
+      editModal.hide();
+    };
+  });
+}
+
+// DELETE Movies
+async function deleteMovie(movieId) {
+  try {
+    const response = await fetch(`${baseURL}/movie/${movieId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    showNotification("success", "Movie successfully deleted!");
+    document.querySelector(`tr[data-id="${movieId}"]`).remove();
+  } catch (error) {
+    showNotification("error", "Error: " + error.message);
+  }
 }
 
 (async function init() {
