@@ -232,8 +232,9 @@ function addMovieToTable(movie) {
   const row = document.createElement('tr');
   row.innerHTML = `
     <th scope="row">${movie.id}</th>
-    <td>${movie.title}</td>
-    <td>${movie.overview.slice(0, 30)}</td>
+
+    <td>${movie.title} </td>
+    <td>${movie.overview.slice(0,30)}</td>
     <td>${movie.category.name}</td>
     <td>${movie.imdb}</td>
     <td>
