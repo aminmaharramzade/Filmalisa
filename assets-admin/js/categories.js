@@ -180,7 +180,7 @@ async function editCategory(categoryId) {
 
   if (!categoryName) {
     showNotification("error", "Please enter a category name.");
-    return;
+    return; 
   }
 
   try {
@@ -202,6 +202,7 @@ async function editCategory(categoryId) {
     const row = document.querySelector(`tr[data-id="${categoryId}"]`);
     row.querySelector('td').textContent = categoryName;
   } catch (error) {
+    console.error("Request Error:", error);
     showNotification("error", "Request Error: " + error.message);
   }
 }
