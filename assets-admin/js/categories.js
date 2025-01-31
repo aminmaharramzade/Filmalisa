@@ -49,6 +49,7 @@ async function fetchData(endpoint) {
   }
 }
 
+
 function displayCategories(categories, wrapper, rowsPerPage, page) {
   wrapper.innerHTML = "";
   page--;
