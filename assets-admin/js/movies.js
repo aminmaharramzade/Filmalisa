@@ -120,28 +120,28 @@ document.querySelector(".movies-form").addEventListener("submit", async (event) 
 
   
 
-  const movieTitle = document.getElementById("title").value.trim();
-  const overview = document.getElementById("overview").value.trim();
-  const coverUrl = document.getElementById("coverUrl").value.trim();
-  const trailerUrl = document.getElementById("trailerUrl").value.trim();
-  const watchUrl = document.getElementById("watchUrl").value.trim();
-  const imdb = document.getElementById("imdb").value.trim();
-  const categoryIds = Array.from(categorySelect.selectedOptions).map(option => Number(option.value));
-  const actorIds = Array.from(actorSelect.selectedOptions).map(option => Number(option.value));
-  const runtime = document.getElementById("runtime").value.trim();
-  const adult = document.getElementById("adult").checked;
+  // const movieTitle = document.getElementById("title").value.trim();
+  // const overview = document.getElementById("overview").value.trim();
+  // const coverUrl = document.getElementById("coverUrl").value.trim();
+  // const trailerUrl = document.getElementById("trailerUrl").value.trim();
+  // const watchUrl = document.getElementById("watchUrl").value.trim();
+  // const imdb = document.getElementById("imdb").value.trim();
+  // const categoryIds = Array.from(categorySelect.selectedOptions).map(option => Number(option.value));
+  // const actorIds = Array.from(actorSelect.selectedOptions).map(option => Number(option.value));
+  // const runtime = document.getElementById("runtime").value.trim();
+  // const adult = document.getElementById("adult").checked;
 
   const movieData = {
-    title: movieTitle,
-    overview: overview,
-    cover_url: coverUrl,
-    fragman: trailerUrl,
-    watch_url: watchUrl,
-    adult: adult,
-    run_time_min: Number(runtime),
-    imdb: Number(imdb),
-    category: categoryIds,
-    actors: [actorIds],
+    title: document.getElementById("title").value,
+    cover_url: document.getElementById("coverUrl").value,
+    fragman: document.getElementById("trailerUrl").value,
+    watch_url: document.getElementById("watchUrl").value,
+    adult: document.getElementById("adult").checked,
+    run_time_min: parseInt(document.getElementById("runtime").value),
+    imdb: document.getElementById("imdb").value,
+    category: parseInt(document.getElementById("category").value),
+    actors: [...document.getElementById("actor").selectedOptions].map(opt => parseInt(opt.value)),
+    overview: document.getElementById("overview").value
   };
 
 
@@ -154,7 +154,6 @@ document.querySelector(".movies-form").addEventListener("submit", async (event) 
       },
       body: JSON.stringify(movieData),
     });
-    console.log("Cavab Məlumatı:", await response.text());
 
 
     if (response.ok) {
