@@ -3,7 +3,7 @@ const submitButton = document.querySelector('.custom-btn');
 const modal = document.querySelector('#exampleModal');
 const pagination = document.querySelector('.pagination');
 let currentPage = 1;
-const rowsPerPage = 10;
+const rowsPerPage = 7;
 
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NzkyNzgzLCJleHAiOjE3Njg4OTY3ODN9.xd6XkHnR3hiWw8rlX-YBuQjzLxTYtoVmeS4zkl04rfc";
