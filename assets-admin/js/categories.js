@@ -1,151 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
+const categoryTableBody = document.querySelector('.movie-table tbody');
+const submitButton = document.querySelector('.custom-btn');
+const modal = document.querySelector('#exampleModal');
+const pagination = document.querySelector('.pagination');
+let currentPage = 1;
+const rowsPerPage = 10;
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link rel="stylesheet" href="../css/global/global.css" />
-  <link rel="stylesheet" href="../css/pages/dashboard.css" />
-  <link rel="stylesheet" href="../css/pages/categories.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-  <title>Categories</title>
-</head>
+const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa/admin";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NzkyNzgzLCJleHAiOjE3Njg4OTY3ODN9.xd6XkHnR3hiWw8rlX-YBuQjzLxTYtoVmeS4zkl04rfc";
 
-<body>
-  <div class="section-menubar-header">
-    <header class="menu-bar">
-      <div class="logo-area">
-        <img src="../assets/images/logo.svg" alt="logo" />
-        <a href="../../index.html">filmalisa</a>
-      </div>
+function showNotification(type, message) {
+  toastr.options = {
+    positionClass: "toast-top-right",
+    timeOut: 3000, 
+  };
 
-      <nav class="nav-list">
-        <ul>
-          <li>
-            <img src="../assets/icons/dashboard-icon.svg" alt="" /><a href="./dashboard.html">Dashboard</a>
-          </li>
-          <li>
-            <img src="../assets/icons/movies-icon.svg" alt="" /><a href="./movies.html">Movies</a>
-          </li>
-          <li style="background-color: #58209d">
-            <img src="../assets/icons/categories-icon.svg" alt="" /><a style="color: var(--textColor)"
-              href="categories.html">Categories</a>
-          </li>
-          <li>
-            <img src="../assets/icons/users-icon.svg" alt="" /><a href="users.html">Users</a>
-          </li>
-          <li>
-            <img src="../assets/icons/comments-icon.svg" alt="" /><a href="comments.html">Comments</a>
-          </li>
-          <li>
-            <img src="../assets/icons/contact-icon.svg" alt="" /><a href="contact.html">Contact us</a>
-          </li>
-          <li>
-            <img src="../assets/icons/users-icon.svg" alt="" /><a href="actors.html">Actors</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="logout-area">
-        <img src="../assets/icons/logout-icon.svg" alt="" />
-        <a href="../../admin.html">Logout</a>
-      </div>
-    </header>
-    <div class="header-dashboard">
-      <header class="header admin-container">
-        <div class="header-text-area">
-          <h2>Hi Admin</h2>
-          <h1>Categories</h1>
-        </div>
+  if (type === "success") {
+    toastr.success(message);
+  } else if (type === "error") {
+    toastr.error(message);
+  } else if (type === "info") {
+    toastr.info(message);
+  } else if (type === "warning") {
+    toastr.warning(message);
+  }
+}
 
-        <div class="admin-acc-head">
-          <button data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Create
-          </button>
-          <img src="../assets/images/test-acc-img.svg" alt="" />
-          <h4>Admin</h4>
-        </div>
-      </header>
-      <table class="table admin-container movie-table ">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div style="display: flex; justify-content: center; margin-top: 10px;" class="pagination"></div>
-      <!-- Add Modal -->
-      <div class="modal fade text-light" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col">
-                  <form class="movies-form">
-                    <div class="mb-3 input-area">
-                      <input type="text" class="form-control text-light" id="title" placeholder="category name" />
-                    </div>
-                    <button id="submit-btn" type="submit" class="btn custom-btn text-light">
-                      Submit
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Delete Confirmation Modal -->
-      <div class="modal fade " id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog text-light modal-dialog-centered">
-          <div class="modal-content delete-modal">
-            <div class="modal-body d-flex justify-content-center align-items-center">
-              Are you sure you want to delete this category?
-            </div>
-            <div class="d-flex justify-content-center align-items-center gap-3 modal-btn ">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn  submit text-light" id="confirmDeleteBtn">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Edit Category Modal -->
-      <div class="modal fade text-light" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col">
-                <form class="movies-form">
-                  <div class="mb-3 input-area">
-                    <input type="text" class="form-control text-light" id="editCategoryName" placeholder="category name" />
-                  </div>
-                  <button id="confirmEditBtn" type="button" class="btn custom-btn text-light">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+// GET 
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-    </div>
-  </div>
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
 
-  <script src="../js/categories.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    const data = await response.json();
+    console.log(data.data);
+    displayCategories(data.data, categoryTableBody, rowsPerPage, currentPage);
+    setupPagination(data.data, pagination, rowsPerPage);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
-</body>
 
-</html>
+function displayCategories(categories, wrapper, rowsPerPage, page) {
+  wrapper.innerHTML = "";
+  page--;
+
+  const start = rowsPerPage * page;
+  const end = start + rowsPerPage;
+  const paginatedCategories = categories.slice(start, end);
+
+  paginatedCategories.forEach(category => {
+    addCategoryToTable(category);
+  });
+}
+
+function setupPagination(items, wrapper, rowsPerPage) {
+  wrapper.innerHTML = "";
+
+  const pageCount = Math.ceil(items.length / rowsPerPage);
+  for (let i = 1; i < pageCount + 1; i++) {
+    const btn = paginationButton(i, items);
+    wrapper.appendChild(btn);
+  }
+}
+
+function paginationButton(page, items) {
+  const button = document.createElement('button');
+  button.innerText = page;
+  button.style.backgroundColor = "#58209d";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.margin = "0 5px";
+  button.style.padding = "5px 10px";
+  button.style.borderRadius = "5px";
+
+  if (currentPage == page) button.classList.add('active');
+
+  button.addEventListener('click', function () {
+    currentPage = page;
+    displayCategories(items, categoryTableBody, rowsPerPage, currentPage);
+
+    const currentBtn = document.querySelector('.pagination button.active');
+    if (currentBtn) currentBtn.classList.remove('active');
+
+    button.classList.add('active');
+  });
+
+  return button;
+}
+
+function addCategoryToTable(category) {
+  const row = document.createElement('tr');
+  row.setAttribute('data-id', category.id);
+  row.innerHTML = `
+    <th scope="row">${category.id}</th>
+    <td>${category.name}</td>
+    <td>
+      <button class="btn btn-primary edit-btn">
+        <i class="fa-regular fa-pen-to-square"></i>
+      </button>
+      <button class="btn btn-danger delete-btn">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </td>
+  `;
+  categoryTableBody.appendChild(row);
+
+  row.querySelector('.delete-btn').addEventListener('click', () => {
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+    deleteModal.show();
+
+    document.getElementById('confirmDeleteBtn').onclick = () => {
+      deleteCategory(category.id);
+      deleteModal.hide();
+    };
+  });
+
+  row.querySelector('.edit-btn').addEventListener('click', () => {
+    document.getElementById('editCategoryName').value = category.name; 
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+
+    document.getElementById('confirmEditBtn').onclick = () => {
+      editCategory(category.id); 
+      editModal.hide();
+    };
+  });
+}
+
+// POST 
+document.querySelector('.movies-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const categoryName = document.getElementById('title').value.trim();
+
+  if (!categoryName) {
+    showNotification("error", "Please enter a category name!");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/category`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: categoryName }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      addCategoryToTable(data.data);
+      showNotification("success", "Category successfully added!");
+    } else {
+      showNotification("error", "Error: " + response.status);
+    }
+  } catch (error) {
+    showNotification("error", error.message);
+  }
+
+  document.getElementById('title').value = '';
+  const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+  modal.hide();
+});
+
+// PUT
+async function editCategory(categoryId) {
+  const categoryName = document.getElementById('editCategoryName').value.trim();
+
+  if (!categoryName) {
+    showNotification("error", "Please enter a category name.");
+    return; 
+  }
+
+  try {
+    const response = await fetch(`${baseURL}/category/${categoryId}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: categoryName }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    showNotification("success", "Category updated successfully!");
+
+    const row = document.querySelector(`tr[data-id="${categoryId}"]`);
+    row.querySelector('td').textContent = categoryName;
+  } catch (error) {
+    console.error("Request Error:", error);
+    showNotification("error", "Request Error: " + error.message);
+  }
+}
+
+// DELETE
+async function deleteCategory(categoryId) {
+  try {
+    const response = await fetch(`${baseURL}/category/${categoryId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    showNotification("success", "Category successfully deleted!");
+    document.querySelector(`tr[data-id="${categoryId}"]`).remove();
+  } catch (error) {
+    showNotification("error", "Error: " + error.message);
+  }
+}
+
+fetchData('categories');
