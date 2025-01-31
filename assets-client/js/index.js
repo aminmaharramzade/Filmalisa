@@ -67,3 +67,17 @@ submitBtn.addEventListener("click", (event) => {
   emailInput.value = "";
   reasonInput.value = "";
 });
+
+if (localStorage.getItem("accessToken")) {
+  const headerBtn = document.querySelector(`.header-btn`);
+  const headerBtnLink = document.querySelector(`.header-btn a`);
+
+  headerBtnLink.textContent = "Home";
+  headerBtnLink.href = "./assets-client/pages/home.html";
+  headerBtnLink.style.padding = "12px";
+  headerBtnLink.style.fontFamily = "var(--numansFont)";
+
+  headerBtn.addEventListener(`click`, function () {
+    window.location.href = "./assets-client/pages/home.html";
+  });
+}

@@ -139,7 +139,7 @@ async function fetchData(endpoint) {
         <h1>${movie.title}</h1>
         </div>
       `;
-      if (movie.category.name === "Action") {
+      if (movie.category.name == "Action") {
         comedyCardArea.appendChild(card);
       } else {
         actionCardArea.appendChild(card);
@@ -182,7 +182,7 @@ async function fetchData(endpoint) {
         <h1>${movie.title}</h1>
         </div>
       `;
-      if (movie.category.name === "Comedy") {
+      if (!movie.category.name === "Comedy") {
         actionCardArea.appendChild(card);
       } else {
         comedyCardArea.appendChild(card);

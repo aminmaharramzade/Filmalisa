@@ -44,7 +44,11 @@ loginBtn.addEventListener("click", async function (event) {
       console.log(data);
 
       const token = data.data.tokens.access_token;
+      const fullName = data.data.profile.full_name;
+      const imgUrl = data.data.profile.img_url;
       localStorage.setItem("accessToken", token);
+      localStorage.setItem("fullName", fullName);
+      localStorage.setItem("imgUrl", imgUrl);
 
       const usersResponse = await fetch(`${baseURL}/admin/users`, {
         method: "GET",

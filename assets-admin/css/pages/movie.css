@@ -27,6 +27,11 @@
   border-color: #323b54;
   color: #fff; /* Set input text color to white */
 }
+.form-select {
+  background-color: #171616;
+  border-color: #323b54;
+  color: #fff; /* Set input text color to white */
+}
 .form-control:focus {
   background-color: #171616;
   border-color: #323b54;

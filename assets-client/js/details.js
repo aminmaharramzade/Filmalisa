@@ -1,5 +1,5 @@
 const baseURL = "https://api.sarkhanrahimli.dev/api/filmalisa";
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInN1YiI6MywiaWF0IjoxNzM3NTc0OTIyLCJleHAiOjE3Njg2Nzg5MjJ9.xM7OU1oOOgk-SicNULAy_ogKRoNy1aiF3SBwVFokyyg`;
+const token = localStorage.getItem("accessToken");
 
 async function fetchMovieDetails(id) {
   try {
@@ -65,10 +65,91 @@ async function fetchMovieDetails(id) {
   }
 }
 
+async function fetchComments(movieId) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comments`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const commentBoxArea = document.querySelector(".comment-box-area");
+    console.log(data);
+
+    commentBoxArea.innerHTML = "";
+
+    data.data.forEach((comment) => {
+      function getImgUrl() {
+        if (localStorage.getItem("imgUrl") == "null") {
+          return "../assets/images/logo.svg";
+        } else {
+          return `${localStorage.getItem("imgUrl")}`;
+        }
+      }
+
+      const commentBox = document.createElement("div");
+      commentBox.classList.add("comment-box", "slide-in");
+      const commentTime = new Date(comment.created_at);
+      const hours = String(commentTime.getHours()).padStart(2, "0");
+      const minutes = String(commentTime.getMinutes()).padStart(2, "0");
+      commentBox.innerHTML = `
+        <div class="comment-box-header">
+          <div class="comment-box-title">
+            <img id='userCommentImg'
+            src="${getImgUrl()}"
+            style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
+              alt=""
+            />
+            <h5>${localStorage.getItem("fullName")}</h5>
+          </div>
+          <p>${hours}:${minutes}</p>
+        </div>
+        <p class="comment-box-desc">
+          ${comment.comment}
+        </p>
+      `;
+      commentBoxArea.appendChild(commentBox);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function postComment(movieId, comment) {
+  try {
+    const response = await fetch(`${baseURL}/movies/${movieId}/comment`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    fetchComments(movieId);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
 if (movieId) {
   fetchMovieDetails(movieId);
+  fetchComments(movieId);
 }
 
 const favBtn = document.querySelector(".search-plus");
@@ -113,9 +194,9 @@ function showModal(message) {
   }, 1000);
 }
 
-function showPlayModal(movie) { 
+function showPlayModal(movie) {
   const modal = document.createElement("div");
-  
+
   modal.classList.add("play-modal");
   modal.innerHTML = `
     <div class="play-modal-content" style="background-image: url(${movie.cover_url});">
@@ -124,7 +205,7 @@ function showPlayModal(movie) {
         <h1>${movie.title}</h1>
         <div class="play-btn-area">
         <img src="../assets/icons/play-black-icon.svg" alt="play icon"/>
-        <a href="${movie.watch_url}" class="play-button">Play</a>
+        <a href="${movie.fragman}" class="play-button">Trailer</a>
         </div>
       </div>
     </div>
@@ -209,3 +290,46 @@ async function fetchMovies(endpoint) {
 }
 
 fetchMovies("movies");
+
+const commentBody = document.querySelector(`.comment-box-area`);
+
+const commentInput = document.querySelector(".comment-input input");
+const commentButton = document.querySelector(".comment-input button");
+
+commentButton.addEventListener("click", () => {
+  const comment = commentInput.value.trim();
+  if (comment && movieId) {
+    postComment(movieId, comment);
+    commentInput.value = ""; // Clear input after posting
+  }
+});
+
+async function fetchAccountData(endpoint) {
+  try {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const account = data.data;
+
+    if (account.img_url == null) {
+      localStorage.setItem("imgUrl", `${account.img_url}`);
+      const userCommentImg = document.querySelector(`#userCommentImg`);
+    }
+
+    console.log(data.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+fetchAccountData(`profile`);

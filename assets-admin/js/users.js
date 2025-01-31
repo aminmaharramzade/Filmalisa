@@ -78,12 +78,22 @@ function paginationButton(page, items) {
 }
 
 function addUsersToTable(user) {
+
+  function getImgUrl() {
+    if(user.img_url === null) {
+      return "../assets/images/logo.svg";
+    }
+    else {
+      return user.img_url;
+    }
+  }
+
   const row = document.createElement("tr");
   row.innerHTML = `
     <th scope="row">${user.id}</th>
     <td>${user.full_name}</td>
     <td>${user.email}</td>
-    <td><img style="width: 30px ; height: 40px;object-fit: cover" src="${user.img_url}"></td>
+    <td><img style="width: 30px ; height: 40px; object-fit: contain;" src="${getImgUrl()}"></td>
   `;
   usersTableBody.appendChild(row);
 }
