@@ -87,11 +87,12 @@ async function fetchComments(movieId) {
 
     data.data.forEach((comment) => {
       function getImgUrl() {
-        if (localStorage.getItem("imgUrl") == "null") {
-          return "../assets/images/logo.svg";
-        } else {
-          return `${localStorage.getItem("imgUrl")}`;
+        if(comment.user.img_url) {
+          return `${comment.user.img_url}`;
         }
+        if (comment.user.img_url = "null") {
+          return "../assets/images/logo.svg";
+        } 
       }
 
       const commentBox = document.createElement("div");
@@ -107,7 +108,7 @@ async function fetchComments(movieId) {
             style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
               alt=""
             />
-            <h5>${localStorage.getItem("fullName")}</h5>
+            <h5>${comment.user.full_name}</h5>
           </div>
           <p>${hours}:${minutes}</p>
         </div>
