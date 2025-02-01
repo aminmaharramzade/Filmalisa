@@ -139,10 +139,8 @@ async function fetchData(endpoint) {
         <h1>${movie.title}</h1>
         </div>
       `;
-      if (!movie.category.name == "Action") {
+      if (movie.category.name == "Thriller") {
         comedyCardArea.appendChild(card);
-      } else {
-        actionCardArea.appendChild(card);
       }
       card.addEventListener("click", () => {
         window.location.href = `../pages/details.html?id=${movie.id}`;
@@ -182,11 +180,9 @@ async function fetchData(endpoint) {
         <h1>${movie.title}</h1>
         </div>
       `;
-      if (!movie.category.name === "Comedy") {
+      if (movie.category.name === "Action") {
         actionCardArea.appendChild(card);
-      } else {
-        comedyCardArea.appendChild(card);
-      }
+      } 
       card.addEventListener("click", () => {
         window.location.href = `../pages/details.html?id=${movie.id}`;
       });
